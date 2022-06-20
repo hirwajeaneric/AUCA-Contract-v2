@@ -20,9 +20,9 @@
                     <h:outputLabel value="Email:" for="email" />
                     <h:inputText id="email" value="#{con.user.email}" title="Email" />
                     <h:outputLabel value="CreatePassword:" for="createPassword" />
-                    <h:inputText id="createPassword" value="#{con.user.createPassword}" title="CreatePassword" />
+                    <h:inputSecret id="createPassword" value="#{con.user.createPassword}" title="CreatePassword" />
                     <h:outputLabel value="ConfirmPassword:" for="confirmPassword" />
-                    <h:inputText id="confirmPassword" value="#{con.user.confirmPassword}" title="ConfirmPassword" />
+                    <h:inputSecret id="confirmPassword" value="#{con.user.confirmPassword}" title="ConfirmPassword" />
                     <h:commandButton value="Sign up" action="#{con.signup()}"/>
                 </h:panelGrid>
                 <p>Already has an account? <h:link value="login" outcome="signin"/></p>

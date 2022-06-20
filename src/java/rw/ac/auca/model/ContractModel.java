@@ -112,8 +112,13 @@ public class ContractModel {
         setup = genericDao.findContractSetup(setupId);
     }
     
+    /*Retreiving informaiton about student registrations*/
     public void retrieveRegistrationData(){
         listOfRegistrations = genericDao.fetchRegistrationData();
+        System.out.println("\nStudents who have done the registration:");
+        for (RegistrationData data : listOfRegistrations) {
+            System.out.println(data.getFirstName());
+        }
     }
     
     public void retrieveUsers(){
@@ -121,8 +126,12 @@ public class ContractModel {
     }
     
     /*Listing contracts of one single student*/
-    public List<Contracts> getContractsById(String regNumber){
-        return listOfContractsForOneStudent = genericDao.listContractPerStudent(regNumber);
+    public void getContractsById(String regNumber){
+        listOfContractsForOneStudent = genericDao.listContractPerStudent(regNumber);
+        System.out.println("\nContracts submitted by this student:");
+        for (Contracts yourContracts : listOfContractsForOneStudent) {
+            System.out.println(yourContracts.getContractNumber());
+        }
     }
     
     /*Finding a user by password*/
@@ -130,24 +139,18 @@ public class ContractModel {
         return genericDao.findPassword(regNumber);
     }
     
-    
     /*LOGIN AS USER*/
     public String login(){
         
         String enteredId = check.getRegistrationNumberC();
         String enteredPassword = check.getPasswordC();
-        
-        System.out.println("Username and password of the user who is logging in is : "+enteredId+" - "+enteredPassword);
-        
+                
         Users fetchedUser = getUserByRegNumber(enteredId);
-      
         String passwordOfFetchedUser = fetchedUser.getCreatePassword();
-        
-        System.out.println("Fetched User's password is: "+passwordOfFetchedUser);
         
         if (enteredPassword.equals(passwordOfFetchedUser)) {
             
-            retrieveRegistrationData();
+            retrieveRegistrationData();            
             getContractsById(enteredId);
             
             namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
