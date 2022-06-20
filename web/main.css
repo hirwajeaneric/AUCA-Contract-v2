@@ -1,0 +1,55 @@
+/* 
+    Created on : Jun 20, 2022, 10:56:37 AM
+    Author     : hirwa
+*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/** AUTHENTICATION ERROR MESSAGE*/
+
+.fatal {
+    padding: 6px 10px;
+    width: 100%;
+    background-color: #ff9999;
+    border-radius: 5px;
+    margin: 20px 0;
+    color: #ff0000;
+    font-size: 80%;
+    display: block;
+} 
+
+.error {
+    padding: 6px 10px;
+    width: 100%;
+    background-color: #ffd9b3;
+    border-radius: 5px;
+    margin: 20px 0;
+    color: #ff9933;
+    font-size: 80%;
+    display: block;
+} 
+
+.info {
+    padding: 6px 10px;
+    width: 100%;
+    background-color: rgb(204, 255, 204);
+    border-radius: 5px;
+    margin: 20px 0;
+    color: green;
+    font-size: 80%;
+    display: block;
+} 
