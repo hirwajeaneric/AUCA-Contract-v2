@@ -1,6 +1,7 @@
 package rw.ac.auca.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -281,7 +282,7 @@ public class ContractModel {
     
     /*TO LOGIN AS A USER*/
     public String goToSignin(){
-        return "signin";
+        return "../signin";
     }
         
     /*LOGIN AS ADMIN*/
@@ -302,18 +303,51 @@ public class ContractModel {
         return "student/user-account";
     }
     
+    public String returnToUserAccount(){
+        namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
+        return "user-account";
+    }
+    
     /*CREATE CONTRACT STEP1*/
     public String createContract(){
-        retrieveRegistrationData();
-        //retrieveContractSetupInformation(setupId);
+        retrieveStudentRegistrationInformation(enteredId);
+        contract.setRegNumber(yourData.getRegNumber());
+        contract.setFirstName(yourData.getFirstName());
+        contract.setLastName(yourData.getLastName());
+        contract.setDueAmount(yourData.getAmountDue());
+        
         namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
-        return "student/create-contract";
+        return "create-contract";
+    }
+    
+    
+    /*CALCULATING AMOUNT PER INSTALLMENT*/
+    public String calculateAmountPerInstallment(){
+        contract.setAmountPerInstallment((contract.getDueAmount()-contract.getPaidAmount())/3);
+        return "create-contract";
     }
     
     /*CONTRACT SUMMARY*/
     public String summary(){
         namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
-        return "student/summary";
+        return "summary";
+    }
+    
+    /*SUBMITTING THE CONTRACT*/
+    public String submitContract(){
+        FacesMessage submitMessage;
+        contract.setCreationdate(new Date());
+        contract.setStatus("Pending");
+        if (contract.getCreationdate()!=null) {
+            genericDao.saveContract(contract);
+            submitMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Submitted!","You shall receive information about your contract lately..");
+            FacesContext.getCurrentInstance().addMessage("submit-message", submitMessage);
+            return "submittion-response";
+        } else {
+            submitMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to submit your contract!","Make sure all required Infomation is provided.");
+            FacesContext.getCurrentInstance().addMessage("submit-message", submitMessage);
+            return "summary";
+        }
     }
     
     /*DASHBOARD*/

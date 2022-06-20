@@ -16,7 +16,7 @@
                     <h:outputLabel value="Registration number:" for="regNumber" />
                     <h:inputText id="regNumber" value="#{con.check.registrationNumberC}" title="RegNumber" required="true"/>
                     <h:outputLabel value="Password:" for="createPassword" />
-                    <h:inputText id="createPassword" value="#{con.check.passwordC}" title="CreatePassword" required="true"/>
+                    <h:inputSecret id="createPassword" value="#{con.check.passwordC}" title="CreatePassword" required="true"/>
                     <h:commandButton value="LOGIN" action="#{con.login()}"/>
                 </h:panelGrid>
                 <p>Don't have an account? <h:link value="Sign up" outcome="signup"/></p>
