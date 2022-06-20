@@ -16,196 +16,279 @@ public class GenericDao {
     
     /*METHODS FOR SAVING*/
     public void saveAdmin(Admins admin){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.save(admin);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.save(admin);
+            transaction.commit();
+            session.close();
+        } catch (HibernateException e) {
+        }
     }
 
     public void saveUsers(Users user){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.save(user);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.save(user);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
 
     public void saveRegistrationData(RegistrationData reg){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.save(reg);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.save(reg);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
 
     public void saveContract(Contracts contract){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.save(contract);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.save(contract);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
 
     public void saveAucaStudents(AucaStudents students){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.save(students);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.save(students);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
 
     public void saveContractSetup(ContractSetup setup){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.save(setup);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.save(setup);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
     
     /*METHODS FOR UPDATING*/
     public void updateAdmin(Admins admin){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.update(admin);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.update(admin);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
 
     public void updateUsers(Users user){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.update(user);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.update(user);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
 
     public void updateContract(Contracts contract){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.update(contract);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.update(contract);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
 
     public void updateContractSetup(ContractSetup setup){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.update(setup);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.update(setup);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
     
     /*METHODS FOR DELETING*/
     public void deleteAdmin(Admins admin){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.delete(admin);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.delete(admin);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
 
     public void deleteUsers(Users user){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.delete(user);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.delete(user);
+            transaction.commit();
+            session.close();            
+        } catch (HibernateException e) {
+        }
     }
 
     public void deleteContract(Contracts contract){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.delete(contract);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.delete(contract);
+            transaction.commit();
+            session.close();    
+        } catch (HibernateException e) {
+        }
     }
     
     public void deleteContractSetup(ContractSetup setup){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        session.delete(setup);
-        transaction.commit();
-        session.close();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.delete(setup);
+            transaction.commit();
+            session.close();    
+        } catch (HibernateException e) {
+        }
     }
  
     /*METHOD FOR RETRIEVING LISTS OF DATA*/
     public List<Admins> fetchAdmin(){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        List<Admins> listOfAdmins = session.createCriteria(Admins.class).list();
-        transaction.commit();
-        session.close();
+        List<Admins> listOfAdmins = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            listOfAdmins = session.createCriteria(Admins.class).list();
+            transaction.commit();
+            session.close();    
+        } catch (HibernateException e) {
+        }
         return listOfAdmins;
     }
 
     public List<Users> fetchUsers(){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        List<Users> listOfUsers = session.createCriteria(Users.class).list();
-        transaction.commit();
-        session.close();
+        List<Users> listOfUsers = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            listOfUsers = session.createCriteria(Users.class).list();
+            transaction.commit();
+            session.close();
+        } catch (HibernateException e) {
+        }
         return listOfUsers;
     }
 
     public List<RegistrationData> fetchRegistrationData(){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        List<RegistrationData> listOfRegistration = session.createCriteria(RegistrationData.class).list();
-        transaction.commit();
-        session.close();
+        List<RegistrationData> listOfRegistration = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            listOfRegistration = session.createCriteria(RegistrationData.class).list();
+            transaction.commit();
+            session.close();    
+        } catch (HibernateException e) {
+        }
         return listOfRegistration;
     }
 
     public List<Contracts> fetchContract(){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        List<Contracts> listOfContracts = session.createCriteria(Contracts.class).list();
-        transaction.commit();
-        session.close();
+        List<Contracts> listOfContracts = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            listOfContracts = session.createCriteria(Contracts.class).list();
+            transaction.commit();
+            session.close();
+        } catch (HibernateException e) {
+        }
         return listOfContracts;
     }
 
     public List<AucaStudents> fetchAucaStudents(){
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        List<AucaStudents> listOfAucaStudents = session.createCriteria(AucaStudents.class).list();
-        transaction.commit();
-        session.close();
+        List<AucaStudents> listOfAucaStudents = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            listOfAucaStudents = session.createCriteria(AucaStudents.class).list();
+            transaction.commit();
+            session.close();   
+        } catch (HibernateException e) {
+        }
         return listOfAucaStudents;
     }
     
     
     /*FETCHING Data by object*/
     public Users findPassword(String regNumber){
-        session = HibernateUtil.getSessionFactory().openSession();
-        Users foundUser = (Users)session.get(Users.class, regNumber);
-        session.close();
-        return foundUser;
+        Users foundUser = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            foundUser = (Users)session.get(Users.class, regNumber);
+            session.close();
+            if (foundUser==null) {
+                return null;
+            } else {
+                return foundUser;
+            }
+        } catch (HibernateException e) {
+            return null;
+        }
     }
 
     public RegistrationData findRegistrationDetailsOfStudent(String regNumber){
-        session = HibernateUtil.getSessionFactory().openSession();
-        RegistrationData foundDetials = (RegistrationData)session.get(RegistrationData.class, regNumber);
-        session.close();
-        return foundDetials;
+        RegistrationData foundDetails = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            foundDetails = (RegistrationData)session.get(RegistrationData.class, regNumber);
+            session.close();
+        } catch (HibernateException e) {
+        }
+        return foundDetails;
     }
 
     public ContractSetup findContractSetup(String setupId){
-        session = HibernateUtil.getSessionFactory().openSession();
-        ContractSetup foundSetup = (ContractSetup)session.get(ContractSetup.class, setupId);
-        session.close();
+        ContractSetup foundSetup = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            foundSetup = (ContractSetup)session.get(ContractSetup.class, setupId);
+            session.close();
+        } catch (HibernateException e) {
+        }
         return foundSetup;
     }
     
     
     /*LISTING OR FETCHING ON CONDITIONS*/
     public List<Contracts> listContractPerStudent(String regNumber){
-        session = HibernateUtil.getSessionFactory().openSession();
-        Criteria cr = session.createCriteria(Contracts.class);
-        cr.add(Restrictions.eq("regNumber", regNumber));
-        List listOfYourContracts = cr.list();
-        session.close();
+        List<Contracts> listOfYourContracts = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Criteria cr = session.createCriteria(Contracts.class);
+            cr.add(Restrictions.eq("regNumber", regNumber));
+            listOfYourContracts = cr.list();
+            session.close();
+        } catch (HibernateException e) {
+        }
         return listOfYourContracts;
     }
 }

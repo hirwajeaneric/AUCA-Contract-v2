@@ -5,25 +5,27 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>AUCA Contract | Signup</title>
+        <link href="main.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
         <f:view>
             <h:form>
                 <h1><h:outputText value="SIGN UP"/></h1>
+                <h:messages  id="signup-message" class="signup-message" infoClass="info" errorClass="error" fatalClass="fatal"/>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="RegNumber:" for="regNumber" />
-                    <h:inputText id="regNumber" value="#{con.user.regNumber}" title="RegNumber" />
+                    <h:inputText id="regNumber" value="#{con.user.regNumber}" title="RegNumber" required="true"/>
                     <h:outputLabel value="FirstName:" for="firstName" />
-                    <h:inputText id="firstName" value="#{con.user.firstName}" title="FirstName" />
+                    <h:inputText id="firstName" value="#{con.user.firstName}" title="FirstName" required="true"/>
                     <h:outputLabel value="LastName:" for="lastName" />
-                    <h:inputText id="lastName" value="#{con.user.lastName}" title="LastName" />
+                    <h:inputText id="lastName" value="#{con.user.lastName}" title="LastName" required="true"/>
                     <h:outputLabel value="Email:" for="email" />
-                    <h:inputText id="email" value="#{con.user.email}" title="Email" />
+                    <h:inputText id="email" value="#{con.user.email}" title="Email" required="true"/>
                     <h:outputLabel value="CreatePassword:" for="createPassword" />
-                    <h:inputText id="createPassword" value="#{con.user.createPassword}" title="CreatePassword" />
+                    <h:inputSecret id="createPassword" value="#{con.user.createPassword}" title="CreatePassword" required="true"/>
                     <h:outputLabel value="ConfirmPassword:" for="confirmPassword" />
-                    <h:inputText id="confirmPassword" value="#{con.user.confirmPassword}" title="ConfirmPassword" />
-                    <h:commandButton value="Sign up" action="#{con.signup()}"/>
+                    <h:inputSecret id="confirmPassword" value="#{con.user.confirmPassword}" title="ConfirmPassword" required="true"/>
+                    <h:commandButton value="Sign up" action="#{con.signup()}"/> 
                 </h:panelGrid>
                 <p>Already has an account? <h:link value="login" outcome="signin"/></p>
             </h:form>

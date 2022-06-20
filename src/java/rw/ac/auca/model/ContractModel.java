@@ -3,6 +3,7 @@ package rw.ac.auca.model;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -93,8 +94,11 @@ public class ContractModel {
     String setupId;
     String regNumber;
     String namesOfLoggedInUser;
-    
-    
+
+    public String getNamesOfLoggedInUser() {
+        return namesOfLoggedInUser;
+    }
+
     /*FETCHING DATA*/
     public void retrieveAdmins(){
         listOfAdmins = genericDao.fetchAdmin();
@@ -112,8 +116,13 @@ public class ContractModel {
         setup = genericDao.findContractSetup(setupId);
     }
     
+    /*Retreiving informaiton about student registrations*/
     public void retrieveRegistrationData(){
         listOfRegistrations = genericDao.fetchRegistrationData();
+        System.out.println("\nStudents who have done the registration:");
+        for (RegistrationData data : listOfRegistrations) {
+            System.out.println(data.getFirstName());
+        }
     }
     
     public void retrieveUsers(){
@@ -121,8 +130,12 @@ public class ContractModel {
     }
     
     /*Listing contracts of one single student*/
-    public List<Contracts> getContractsById(String regNumber){
-        return listOfContractsForOneStudent = genericDao.listContractPerStudent(regNumber);
+    public void getContractsById(String regNumber){
+        listOfContractsForOneStudent = genericDao.listContractPerStudent(regNumber);
+        System.out.println("\nContracts submitted by this student:");
+        for (Contracts yourContracts : listOfContractsForOneStudent) {
+            System.out.println(yourContracts.getContractNumber());
+        }
     }
     
     /*Finding a user by password*/
@@ -130,30 +143,27 @@ public class ContractModel {
         return genericDao.findPassword(regNumber);
     }
     
+    Users fetchedUser;
+    String enteredId;
     
     /*LOGIN AS USER*/
     public String login(){
         
-        String enteredId = check.getRegistrationNumberC();
+        enteredId = check.getRegistrationNumberC();
         String enteredPassword = check.getPasswordC();
-        
-        System.out.println("Username and password of the user who is logging in is : "+enteredId+" - "+enteredPassword);
-        
-        Users fetchedUser = getUserByRegNumber(enteredId);
-      
+                
+        fetchedUser = getUserByRegNumber(enteredId);
         String passwordOfFetchedUser = fetchedUser.getCreatePassword();
-        
-        System.out.println("Fetched User's password is: "+passwordOfFetchedUser);
         
         if (enteredPassword.equals(passwordOfFetchedUser)) {
             
-            retrieveRegistrationData();
+            retrieveRegistrationData();            
             getContractsById(enteredId);
             
             namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
             return "student/user-account";   
         } else {
-            FacesMessage loginMessage = new FacesMessage("Incorrect username or password");
+            FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Incorrect username or password","Try again");
             FacesContext.getCurrentInstance().addMessage("error-message", loginMessage);
             return "signin";   
         }
@@ -166,12 +176,29 @@ public class ContractModel {
     
     /*SIGNUP AS USER*/
     public String signup(){
-        if (true) {
-            
-            return "sign";   
-        } else {
-            
+        
+        String enteredId = user.getRegNumber();
+        System.out.println("\nEntered ID: "+enteredId);
+        
+        List<Users> allUser = genericDao.fetchUsers();
+        int found = 0;
+        for (Users aUser : allUser) {
+            if (aUser.getRegNumber().equals(enteredId)) {
+                found = 1;
+            } else {
+                found = 0;
+            }
+        }
+        
+        if (found == 1) {
+            FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_WARN,"This ID is already registered!","You should either change the id or login");
+            FacesContext.getCurrentInstance().addMessage("signup-message", signupMessage);
             return "signup";   
+        } else {
+            genericDao.saveUsers(user);
+            FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Account Successfully Created!","Confirm your email and login.");
+            FacesContext.getCurrentInstance().addMessage("error-message", signupMessage);
+            return "signin";   
         }
     }
     
@@ -189,31 +216,32 @@ public class ContractModel {
     
     /*USER ACCOUNT*/
     public String userAccount(){
-    
-        return "";
+        namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
+        return "student/user-account";
     }
     
     /*CREATE CONTRACT STEP1*/
     public String step1(){
-    
-        return "";
+        
+        namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
+        return "student/contract-step1";
     }
     
     /*CREATE CONTRACT STEP2*/
     public String step2(){
-    
-        return "";
+        namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
+        return "student/contract-step2";
     }
     
     /*CONTRACT SUMMARY*/
     public String summary(){
-    
-        return "";
+        namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
+        return "student/summary";
     }
     
     /*DASHBOARD*/
     public String dashboard(){
     
-        return "";
+        return "admin/dashboard";
     }
 }
