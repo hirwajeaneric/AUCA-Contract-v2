@@ -95,10 +95,74 @@ public class ContractModel {
     String regNumber;
     String namesOfLoggedInUser;
 
+    public List<Admins> getListOfAdmins() {
+        return listOfAdmins;
+    }
+
+    public void setListOfAdmins(List<Admins> listOfAdmins) {
+        this.listOfAdmins = listOfAdmins;
+    }
+
+    public List<AucaStudents> getListOfAucaStudents() {
+        return listOfAucaStudents;
+    }
+
+    public void setListOfAucaStudents(List<AucaStudents> listOfAucaStudents) {
+        this.listOfAucaStudents = listOfAucaStudents;
+    }
+
+    public List<Contracts> getListOfContracts() {
+        return listOfContracts;
+    }
+
+    public void setListOfContracts(List<Contracts> listOfContracts) {
+        this.listOfContracts = listOfContracts;
+    }
+
+    public List<Contracts> getListOfContractsForOneStudent() {
+        return listOfContractsForOneStudent;
+    }
+
+    public void setListOfContractsForOneStudent(List<Contracts> listOfContractsForOneStudent) {
+        this.listOfContractsForOneStudent = listOfContractsForOneStudent;
+    }
+
+    public List<RegistrationData> getListOfRegistrations() {
+        return listOfRegistrations;
+    }
+
+    public void setListOfRegistrations(List<RegistrationData> listOfRegistrations) {
+        this.listOfRegistrations = listOfRegistrations;
+    }
+
+    public List<Users> getListOfUsers() {
+        return listOfUsers;
+    }
+
+    public void setListOfUsers(List<Users> listOfUsers) {
+        this.listOfUsers = listOfUsers;
+    }
+
+    public Users getFetchedUser() {
+        return fetchedUser;
+    }
+
+    public void setFetchedUser(Users fetchedUser) {
+        this.fetchedUser = fetchedUser;
+    }
+     
     public String getNamesOfLoggedInUser() {
         return namesOfLoggedInUser;
     }
 
+    
+ 
+    Users fetchedUser;
+    String enteredId;
+    RegistrationData yourData;
+    ContractSetup aSetup;
+    
+    
     /*FETCHING DATA*/
     public void retrieveAdmins(){
         listOfAdmins = genericDao.fetchAdmin();
@@ -112,8 +176,9 @@ public class ContractModel {
         listOfContracts = genericDao.fetchContract();
     }
     
-    public void getAContractSetups(){
-        setup = genericDao.findContractSetup(setupId);
+    public void retrieveStudentRegistrationInformation(String regNumber){
+        yourData = genericDao.findRegistrationDetailsOfStudent(regNumber);
+        System.out.println("\nYour data includes: "+yourData.getAmountDue()+" - "+yourData.getFirstName());
     }
     
     /*Retreiving informaiton about student registrations*/
@@ -123,6 +188,10 @@ public class ContractModel {
         for (RegistrationData data : listOfRegistrations) {
             System.out.println(data.getFirstName());
         }
+    }
+    
+    public void retrieveContractSetupInformation(String setupId){
+        aSetup = genericDao.findContractSetup(setupId);
     }
     
     public void retrieveUsers(){
@@ -143,9 +212,12 @@ public class ContractModel {
         return genericDao.findPassword(regNumber);
     }
     
-    Users fetchedUser;
-    String enteredId;
     
+    
+    /**
+     * METHODS THAT WORK ON THE GUI
+     */
+        
     /*LOGIN AS USER*/
     public String login(){
         
@@ -167,11 +239,6 @@ public class ContractModel {
             FacesContext.getCurrentInstance().addMessage("error-message", loginMessage);
             return "signin";   
         }
-    }
-    
-    /*SIGNUP AS USER*/
-    public String goToSignup(){
-        return "signup";
     }
     
     /*SIGNUP AS USER*/
@@ -202,6 +269,21 @@ public class ContractModel {
         }
     }
     
+    /**
+     *
+     * NAVIGATION 
+     */
+    
+    /*TO SIGNUP AS USER*/
+    public String goToSignup(){
+        return "signup";
+    }
+    
+    /*TO LOGIN AS A USER*/
+    public String goToSignin(){
+        return "signin";
+    }
+        
     /*LOGIN AS ADMIN*/
     public String signinAdmin(){
     
@@ -221,16 +303,11 @@ public class ContractModel {
     }
     
     /*CREATE CONTRACT STEP1*/
-    public String step1(){
-        
+    public String createContract(){
+        retrieveRegistrationData();
+        //retrieveContractSetupInformation(setupId);
         namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
-        return "student/contract-step1";
-    }
-    
-    /*CREATE CONTRACT STEP2*/
-    public String step2(){
-        namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
-        return "student/contract-step2";
+        return "student/create-contract";
     }
     
     /*CONTRACT SUMMARY*/
