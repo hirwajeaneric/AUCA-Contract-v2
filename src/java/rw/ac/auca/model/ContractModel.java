@@ -64,8 +64,9 @@ public class ContractModel {
         return contract;
     }
 
-    public void setContract(Contracts contract) {
+    public String setContract(Contracts contract) {
         this.contract = contract;
+        return "view-contract";
     }
 
     public ContractSetup getSetup() {
@@ -95,7 +96,16 @@ public class ContractModel {
     String setupId;
     String regNumber;
     String namesOfLoggedInUser;
+    String accepted;
 
+    public String getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(String accepted) {
+        this.accepted = accepted;
+    }
+    
     public List<Admins> getListOfAdmins() {
         return listOfAdmins;
     }
@@ -282,12 +292,12 @@ public class ContractModel {
     
     /*TO LOGIN AS A USER*/
     public String goToSignin(){
-        return "../signin";
+        return "/faces/signin";
     }
         
     /*LOGIN AS ADMIN*/
     public String signinAdmin(){
-    
+        
         return "";
     }
     
@@ -310,14 +320,28 @@ public class ContractModel {
     
     /*CREATE CONTRACT STEP1*/
     public String createContract(){
-        retrieveStudentRegistrationInformation(enteredId);
-        contract.setRegNumber(yourData.getRegNumber());
-        contract.setFirstName(yourData.getFirstName());
-        contract.setLastName(yourData.getLastName());
-        contract.setDueAmount(yourData.getAmountDue());
-        
         namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
-        return "create-contract";
+        int found = 1;
+        for (RegistrationData info : listOfRegistrations) {
+            if (info.getRegNumber().equals(enteredId)) {
+                found++;
+            } else {
+                found = 1;
+            }
+        }
+ 
+        if (found>1) {
+            retrieveStudentRegistrationInformation(enteredId);
+            contract.setRegNumber(yourData.getRegNumber());
+            contract.setFirstName(yourData.getFirstName());
+            contract.setLastName(yourData.getLastName());
+            contract.setDueAmount(yourData.getAmountDue());    
+            return "create-contract";
+        } else {
+            FacesMessage userAccountMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL ,"You don't have courses in your box, Can't create a contract.","Register contract");
+            FacesContext.getCurrentInstance().addMessage("error-message", userAccountMessage);
+            return "user-account";
+        }
     }
     
     
@@ -328,15 +352,36 @@ public class ContractModel {
     }
     
     /*CONTRACT SUMMARY*/
-    public String summary(){
+    public String goToSummary(){
         namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
-        return "summary";
+        return "contract-summary";
+    }
+    
+    public String goToConfirm(){
+        contract.setCreationdate(new Date());
+        namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
+        return "confirm-contract";
     }
     
     /*SUBMITTING THE CONTRACT*/
     public String submitContract(){
         FacesMessage submitMessage;
-        contract.setCreationdate(new Date());
+        contract.setStatus("Pending");
+        if (contract.getCreationdate()!=null) {
+            genericDao.saveContract(contract);
+            submitMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Submitted!","You shall receive information about your contract lately..");
+            FacesContext.getCurrentInstance().addMessage("submit-message", submitMessage);
+            return "submittion-response";
+        } else {
+            submitMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to submit your contract!","Make sure all required Infomation is provided.");
+            FacesContext.getCurrentInstance().addMessage("submit-message", submitMessage);
+            return "summary";
+        }
+    }
+
+    /*SUBMITTING THE CONTRACT*/
+    public String updateContract(){
+        FacesMessage submitMessage;
         contract.setStatus("Pending");
         if (contract.getCreationdate()!=null) {
             genericDao.saveContract(contract);
@@ -352,7 +397,9 @@ public class ContractModel {
     
     /*DASHBOARD*/
     public String dashboard(){
-    
+        retrieveContracts();
+        retrieveUsers();
+        retrieveAdmins();
         return "admin/dashboard";
     }
 }
