@@ -21,7 +21,7 @@
                         <h:outputLabel value="FirstName:" for="firstName" />
                         <h:inputText id="firstName" value="#{con.contract.firstName}"/>
                         <h:outputLabel value="LastName:" for="lastName" />
-                        <h:inputText id="lastName" value="#{con.contract.lastName}"/>
+                        <h:inputText id="lastName" value="#{con.contract.lastName}" />
                         <h:outputLabel value="Phone:" for="phone" />
                         <h:inputText id="phone" value="#{con.contract.phone}" />
                         <h:outputLabel value="Email:" for="email" />
@@ -36,18 +36,18 @@
                         <h:inputText id="amountPerInstallment" value="#{con.contract.amountPerInstallment}" />
                         <h:outputLabel value="Creationdate:" for="creationdate" />
                         <h:inputText id="creationdate" value="#{con.contract.creationdate}">
-                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                            <f:convertDateTime pattern="dd-MM-yyyy" />
                         </h:inputText>
                         <h:outputLabel value="Status:" for="status" />
                         <h:selectOneMenu value="#{con.contract.status}">
-                            <f:selectItem itemLabel="Pending" itemValue="Pending"/>
-                            <f:selectItem itemLabel="Approved" itemValue="Approved"/>
-                            <f:selectItem itemLabel="Rejected" itemValue="Rejected"/>
+                            <f:selectItem itemLabel="Pending" itemValue="Pending" />
+                            <f:selectItem itemLabel="Approved" itemValue="Approved" />
+                            <f:selectItem itemLabel="Rejected" itemValue="Rejected" />
                         </h:selectOneMenu>
-                        <h:commandButton value="Update" action="#{con.updateContract(contract)}"/>
-                        <h:commandButton value="Delete" action="#{con.deleteContract(contract)}"/>
+                        <h:commandButton value="Update" action="#{con.updateContract()}" />
+                        <h:commandButton value="Delete" action="#{con.deleteContract(contract)}" />
                     </h:panelGrid>
-                    <h:commandButton value="Dashboard Home" action="#{con.dashboard()}"/>
+                    <h:commandButton value="Dashboard Home" action="#{con.dashboard()}" />
                 </h:form>
             </f:view>
         </div>
