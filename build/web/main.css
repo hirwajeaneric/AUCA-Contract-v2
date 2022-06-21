@@ -36,7 +36,7 @@ body,
 .error {
     padding: 6px 10px;
     width: 100%;
-    background-color: #ffd9b3;
+    background-color: #fff0e1;
     border-radius: 5px;
     margin: 20px 0;
     color: #ff9933;
@@ -54,7 +54,7 @@ body,
     font-size: 80%;
     display: block;
 } 
-
+ 
 
 
 /*SIGNIN AND SIGNUP FORMS*/
@@ -62,18 +62,80 @@ body,
     background: url("./005-G3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
+    height: 100%;
+    overflow: visible;
 }
 
 .sign-container {
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
+    width: 100%;
+    height: 100%;
  }
 
 .signup-form,
 .signin-form {
     padding: 50px;
-
+    background-color: white;
+    margin: 120px 0;
 }
+
+
+/*STYLES OF H1s ON ALL FORMS*/
+.headerOnForm {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+/*STYLES OF ALL SUBMIT BUTTONS USED ON THE LOGIN, SIGNUP,...*/
+input[type="submit"] {
+    background-color: black;
+    color:white;
+    border: none;
+    padding: 8px 16px;
+    font-weight: 600;
+    margin: 20px 0;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background-color: orange;
+    color:black;
+}
+
+/*STYLES OF INPUT FIELDS ON FORMS*/
+input[type="text"],
+input[type="password"], 
+select {
+    padding: 5px 10px;
+}
+
+/*STYLES OF BELLOW MESSAGES*/
+.text-messages-auth {
+    text-align: center;
+}
+
+/*STYLES OF LINKS*/
+a {
+    text-decoration:none;
+    color: #004080;
+}
+
+a:hover {
+    color: brown;
+}
+
+/*STYLES FOR THE DATE STYLE OF THE FORM*/
+td {
+    padding: 10px 5px;
+}
+
+
+
+
+
+
+
 
 
 /*STYLES OF THE CONTRACT*/
