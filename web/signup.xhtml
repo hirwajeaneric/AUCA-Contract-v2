@@ -11,7 +11,11 @@
         <div class="sign-container">
             <f:view>
             <h:form class="signup-form">
-                <h1><h:outputText value="SIGN UP"/></h1>
+                <div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center; margin-bottom: 30px; padding-bottom: 30px; border-bottom: 2px solid #004080;">
+                    <img src="cropped-AUCA-logo-wide-webblue-2-1-34.png" alt="AUCA LOGO" style="width: 80px;"/>
+                    <h1 style="color: #004080; font-size: 230%; ">AUCA<br></br>CONTRACT</h1>
+                </div>
+                <h1 class="headerOnForm"><h:outputText value="SIGN UP"/></h1>
                 <h:messages  id="signup-message" class="signup-message" infoClass="info" errorClass="error" fatalClass="fatal"/>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="RegNumber:" for="regNumber" />
@@ -25,10 +29,10 @@
                     <h:outputLabel value="CreatePassword:" for="createPassword" />
                     <h:inputSecret id="createPassword" value="#{con.user.createPassword}" title="CreatePassword" required="true"/>
                     <h:outputLabel value="ConfirmPassword:" for="confirmPassword" />
-                    <h:inputSecret id="confirmPassword" value="#{con.user.confirmPassword}" title="ConfirmPassword" required="true"/>
-                    <h:commandButton value="Sign up" action="#{con.signup()}"/> 
+                    <h:inputSecret id="confirmPassword" value="#{con.user.confirmPassword}" title="ConfirmPassword" required="true"/>                    
                 </h:panelGrid>
-                <p>Already has an account? <h:link value="login" outcome="signin"/></p>
+                <h:commandButton value="Sign up" action="#{con.signup()}" class="button1"/>
+                <p class="text-messages-auth">Already has an account? <h:link value="login" outcome="signin"/></p>
             </h:form>
         </f:view>
         </div>
