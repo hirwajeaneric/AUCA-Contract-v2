@@ -25,8 +25,17 @@ public class ContractModel {
     private ContractSetup setup = new ContractSetup();
     private RegistrationData registration = new RegistrationData();
     private Checking check = new Checking();
-
+    private CheckA checkadmin = new CheckA();
+    
     private GenericDao genericDao = new GenericDao();
+
+    public CheckA getCheckadmin() {
+        return checkadmin;
+    }
+
+    public void setCheckadmin(CheckA checkadmin) {
+        this.checkadmin = checkadmin;
+    }
 
     public Checking getCheck() {
         return check;
@@ -96,6 +105,7 @@ public class ContractModel {
     String setupId;
     String regNumber;
     String namesOfLoggedInUser;
+    String namesOfLoggedInAdmin;
     String accepted;
 
     public String getAccepted() {
@@ -166,10 +176,16 @@ public class ContractModel {
         return namesOfLoggedInUser;
     }
 
+    public String getNamesOfLoggedInAdmin() {
+        return namesOfLoggedInAdmin;
+    }
+
+   
     
- 
     Users fetchedUser;
+    Admins fetchedAdmin;
     String enteredId;
+    String enteredAdminId;
     RegistrationData yourData;
     ContractSetup aSetup;
     
@@ -222,6 +238,11 @@ public class ContractModel {
     public Users getUserByRegNumber(String regNumber){
         return genericDao.findPassword(regNumber);
     }
+   
+    /*Finding an admin by their id*/
+    public Admins getAdminById(String id){
+        return genericDao.findAdminPassword(id);
+    }
     
     
     
@@ -249,6 +270,31 @@ public class ContractModel {
             FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Incorrect username or password","Try again");
             FacesContext.getCurrentInstance().addMessage("error-message", loginMessage);
             return "signin";   
+        }
+    }
+    
+    /*LOGIN AS ADMIN*/
+    public String loginAdmin(){
+        
+        enteredAdminId = checkadmin.getIdC();
+        String enteredAdminPassword = checkadmin.getPasswordC();
+                
+        fetchedAdmin = getAdminById(enteredAdminId);
+        String passwordOfFetchedAdmin = fetchedAdmin.getConfirmPassword();
+        
+        if (enteredAdminPassword.equals(passwordOfFetchedAdmin)) {
+            
+            retrieveContracts();
+            retrieveRegistrationData();
+            retrieveUsers();
+            retrieveAdmins();
+            
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getLastName();
+            return "dashboard";   
+        } else {
+            FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Incorrect username or password","Try again");
+            FacesContext.getCurrentInstance().addMessage("error-message", loginMessage);
+            return "admin-signin";   
         }
     }
     
@@ -280,6 +326,34 @@ public class ContractModel {
         }
     }
     
+    /*SIGNUP AS ADMIN*/
+    public String signupAdmin(){
+        
+        String enteredAdminUsername = admin.getUsername();
+        System.out.println("\nEntered ID: "+enteredAdminUsername);
+        
+        List<Admins> allAdmins = genericDao.fetchAdmin();
+        int found = 0;
+        for (Admins anAdmin : allAdmins) {
+            if (anAdmin.getUsername().equals(enteredAdminUsername)) {
+                found = 1;
+            } else {
+                found = 0;
+            }
+        }
+        
+        if (found == 1) {
+            FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_WARN,"This username is already registered!","You should either change the id or login");
+            FacesContext.getCurrentInstance().addMessage("signup-message", signupMessage);
+            return "admin-signup";   
+        } else {
+            genericDao.saveAdmin(admin);
+            FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Account Successfully Created!","Confirm your email and login.");
+            FacesContext.getCurrentInstance().addMessage("error-message", signupMessage);
+            return "admin-signin";   
+        }
+    }
+    
     /**
      *
      * NAVIGATION 
@@ -298,12 +372,6 @@ public class ContractModel {
     /*LOGIN AS ADMIN*/
     public String signinAdmin(){
         
-        return "";
-    }
-    
-    /*SIGNUP AS ADMIN*/
-    public String signupAdmin(){
-    
         return "";
     }
     
@@ -379,20 +447,26 @@ public class ContractModel {
         }
     }
 
-    /*SUBMITTING THE CONTRACT*/
+    /*UPDATING THE CONTRACT*/
     public String updateContract(){
-        FacesMessage submitMessage;
+        FacesMessage updateMessage;
         contract.setStatus("Pending");
         if (contract.getCreationdate()!=null) {
-            genericDao.saveContract(contract);
-            submitMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Submitted!","You shall receive information about your contract lately..");
-            FacesContext.getCurrentInstance().addMessage("submit-message", submitMessage);
-            return "submittion-response";
+            genericDao.updateContract(contract);
+            updateMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Updated!","Well Done..");
+            FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
+            return "dashboard";
         } else {
-            submitMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to submit your contract!","Make sure all required Infomation is provided.");
-            FacesContext.getCurrentInstance().addMessage("submit-message", submitMessage);
-            return "summary";
+            updateMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to update user contract!","Make sure all required Infomation is provided.");
+            FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
+            return "view-contract";
         }
+    }
+
+    /*SUBMITTING THE CONTRACT*/
+    public String deleteContract(){
+        genericDao.deleteContract(contract);
+        return "dashboard";
     }
     
     /*DASHBOARD*/

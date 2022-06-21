@@ -10,7 +10,8 @@
     font-family: sans-serif;
 }
 
-body{
+body,
+.sign-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,6 +54,26 @@ body{
     font-size: 80%;
     display: block;
 } 
+
+
+
+/*SIGNIN AND SIGNUP FORMS*/
+.signup-signin-body {
+    background: url("./005-G3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sign-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+ }
+
+.signup-form,
+.signin-form {
+    padding: 50px;
+
+}
 
 
 /*STYLES OF THE CONTRACT*/

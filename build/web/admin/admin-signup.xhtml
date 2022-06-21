@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>AUCA Contract | Admin Signup</title>
+        <link href="admin-styles.css" rel="stylesheet" type="text/css"/>
+        <style>
+            body{
+                background-color: gray;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="sign-container">
+            <f:view>
+            <h:form class="signup-form">
+                <h1><h:outputText value="SIGN UP"/></h1>
+                <h:messages  id="signup-message" class="signup-message" infoClass="info" errorClass="error" fatalClass="fatal"/>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="UserName" for="UserName" />
+                    <h:inputText id="UserName" value="#{con.admin.username}" title="UserName" required="true"/>
+                    <h:outputLabel value="FirstName:" for="firstName" />
+                    <h:inputText id="firstName" value="#{con.admin.firstName}" title="FirstName" required="true"/>
+                    <h:outputLabel value="LastName:" for="lastName" />
+                    <h:inputText id="lastName" value="#{con.admin.lastName}" title="LastName" required="true"/>
+                    <h:outputLabel value="Email:" for="email" />
+                    <h:inputText id="email" value="#{con.admin.email}" title="Email" required="true"/>
+                    <h:outputLabel value="CreatePassword:" for="createPassword" />
+                    <h:inputSecret id="createPassword" value="#{con.admin.createPassword}" title="CreatePassword" required="true"/>
+                    <h:outputLabel value="ConfirmPassword:" for="confirmPassword" />
+                    <h:inputSecret id="confirmPassword" value="#{con.admin.confirmPassword}" title="ConfirmPassword" required="true"/>
+                    <h:commandButton value="Sign up" action="#{con.signupAdmin()}"/> 
+                </h:panelGrid>
+                <p>Already has an account? <h:link value="login" outcome="admin-signin"/></p>
+            </h:form>
+        </f:view>
+        </div>
+    </h:body>
+</html>
+

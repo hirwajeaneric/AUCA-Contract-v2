@@ -255,6 +255,22 @@ public class GenericDao {
         }
     }
 
+    public Admins findAdminPassword(String regNumber){
+        Admins foundAdmin = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            foundAdmin = (Admins)session.get(Admins.class, regNumber);
+            session.close();
+            if (foundAdmin==null) {
+                return null;
+            } else {
+                return foundAdmin;
+            }
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
+
     public RegistrationData findRegistrationDetailsOfStudent(String regNumber){
         RegistrationData foundDetails = null;
         try {
