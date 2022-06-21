@@ -28,6 +28,7 @@
             <h1>Your Contracts</h1>
             <f:view>
                 <h:form styleClass="displayForm">
+                    <h:messages  id="error-message" class="error-message" infoClass="info" errorClass="error" fatalClass="fatal"/>
                     <h:dataTable value="#{con.listOfContractsForOneStudent}" var="item" styleClass="displayTable1">
                         <h:column>
                             <f:facet name="header">

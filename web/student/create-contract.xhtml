@@ -49,7 +49,7 @@
                         <h:outputLabel value="NameOnReciept:" for="nameOnReciept" />
                         <h:inputText id="nameOnReciept" value="#{con.contract.nameOnReciept}" title="NameOnReciept" required="true"/>
                         
-                        <h:commandButton value="Summary" action="#{con.summary()}"/>
+                        <h:commandButton value="Summary" action="#{con.goToConfirm()}" />
                     </h:panelGrid>
                 </h:form>
             </f:view>
