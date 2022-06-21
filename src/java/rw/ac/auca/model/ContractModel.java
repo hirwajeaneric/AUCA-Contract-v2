@@ -464,7 +464,7 @@ public class ContractModel {
     }
 
     /*UPDATING THE CONTRACT*/
-    public String updateContract(Contracts contract){
+    public String updateContract(){
         FacesMessage updateMessage;
         try {
             if (contract.getCreationdate()!=null) {
@@ -489,9 +489,10 @@ public class ContractModel {
         FacesMessage deleteMessage;
         try {
             genericDao.deleteContract(contract);
+            retrieveContracts();
             return "dashboard";
         } catch (Exception e) {
-            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Failed to delete contract | "+e.getMessage()+"","Well Done..");
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to delete contract | "+e.getMessage()+"","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
         }
@@ -501,11 +502,12 @@ public class ContractModel {
     public String dashboard(){
         try {
             retrieveContracts();
+            retrieveRegistrationData();
             retrieveUsers();
             retrieveAdmins();
             return "dashboard";
         } catch (Exception e) {
-            FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Unable to access dashboard | "+e.getMessage()+"","Try again");
+            FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL ,"Unable to access dashboard | "+e.getMessage()+"","Try again");
             FacesContext.getCurrentInstance().addMessage("error-message", loginMessage);
             return "admin-signin"; 
         }
