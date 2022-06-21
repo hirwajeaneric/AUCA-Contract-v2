@@ -107,7 +107,14 @@ public class ContractModel {
     String namesOfLoggedInUser;
     String namesOfLoggedInAdmin;
     String accepted;
+    Users fetchedUser;
+    Admins fetchedAdmin;
+    String enteredId;
+    String enteredAdminId;
+    RegistrationData yourData;
+    ContractSetup aSetup;
 
+    
     public String getAccepted() {
         return accepted;
     }
@@ -182,14 +189,6 @@ public class ContractModel {
 
    
     
-    Users fetchedUser;
-    Admins fetchedAdmin;
-    String enteredId;
-    String enteredAdminId;
-    RegistrationData yourData;
-    ContractSetup aSetup;
-    
-    
     /*FETCHING DATA*/
     public void retrieveAdmins(){
         listOfAdmins = genericDao.fetchAdmin();
@@ -202,21 +201,7 @@ public class ContractModel {
     public void retrieveContracts(){
         listOfContracts = genericDao.fetchContract();
     }
-    
-    public void retrieveStudentRegistrationInformation(String regNumber){
-        yourData = genericDao.findRegistrationDetailsOfStudent(regNumber);
-        System.out.println("\nYour data includes: "+yourData.getAmountDue()+" - "+yourData.getFirstName());
-    }
-    
-    /*Retreiving informaiton about student registrations*/
-    public void retrieveRegistrationData(){
-        listOfRegistrations = genericDao.fetchRegistrationData();
-        System.out.println("\nStudents who have done the registration:");
-        for (RegistrationData data : listOfRegistrations) {
-            System.out.println(data.getFirstName());
-        }
-    }
-    
+        
     public void retrieveContractSetupInformation(String setupId){
         aSetup = genericDao.findContractSetup(setupId);
     }
@@ -244,7 +229,19 @@ public class ContractModel {
         return genericDao.findAdminPassword(id);
     }
     
+    public void retrieveStudentRegistrationInformation(String regNumber){
+        yourData = genericDao.findRegistrationDetailsOfStudent(regNumber);
+        System.out.println("\nYour data includes: "+yourData.getAmountDue()+" - "+yourData.getFirstName());
+    }
     
+    /*Retreiving informaiton about student registrations*/
+    public void retrieveRegistrationData(){
+        listOfRegistrations = genericDao.fetchRegistrationData();
+        System.out.println("\nStudents who have done the registration:");
+        for (RegistrationData data : listOfRegistrations) {
+            System.out.println(data.getFirstName());
+        }
+    }
     
     /**
      * METHODS THAT WORK ON THE GUI
@@ -252,106 +249,127 @@ public class ContractModel {
         
     /*LOGIN AS USER*/
     public String login(){
-        
-        enteredId = check.getRegistrationNumberC();
-        String enteredPassword = check.getPasswordC();
-                
-        fetchedUser = getUserByRegNumber(enteredId);
-        String passwordOfFetchedUser = fetchedUser.getCreatePassword();
-        
-        if (enteredPassword.equals(passwordOfFetchedUser)) {
+        try {
+            enteredId = check.getRegistrationNumberC();
+            String enteredPassword = check.getPasswordC();
+
+            fetchedUser = getUserByRegNumber(enteredId);
+            String passwordOfFetchedUser = fetchedUser.getCreatePassword();
+
+            if (enteredPassword.equals(passwordOfFetchedUser)) {
             
-            retrieveRegistrationData();            
-            getContractsById(enteredId);
-            
-            namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
-            return "student/user-account";   
-        } else {
+                retrieveRegistrationData();            
+                getContractsById(enteredId);
+
+                namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
+                return "student/user-account";   
+            } else {
+                FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Incorrect username or password","Try again");
+                FacesContext.getCurrentInstance().addMessage("error-message", loginMessage);
+                return "signin";   
+            }
+        } catch (Exception e) {
             FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Incorrect username or password","Try again");
             FacesContext.getCurrentInstance().addMessage("error-message", loginMessage);
-            return "signin";   
+            return "signin";
         }
     }
     
     /*LOGIN AS ADMIN*/
     public String loginAdmin(){
-        
-        enteredAdminId = checkadmin.getIdC();
-        String enteredAdminPassword = checkadmin.getPasswordC();
-                
-        fetchedAdmin = getAdminById(enteredAdminId);
-        String passwordOfFetchedAdmin = fetchedAdmin.getConfirmPassword();
-        
-        if (enteredAdminPassword.equals(passwordOfFetchedAdmin)) {
+        try {
+            enteredAdminId = checkadmin.getIdC();
+            String enteredAdminPassword = checkadmin.getPasswordC();
+
+            fetchedAdmin = getAdminById(enteredAdminId);
+            String passwordOfFetchedAdmin = fetchedAdmin.getConfirmPassword();
+
+            if (enteredAdminPassword.equals(passwordOfFetchedAdmin)) {
             
-            retrieveContracts();
-            retrieveRegistrationData();
-            retrieveUsers();
-            retrieveAdmins();
-            
-            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getLastName();
-            return "dashboard";   
-        } else {
+                retrieveContracts();
+                retrieveRegistrationData();
+                retrieveUsers();
+                retrieveAdmins();
+
+                namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getLastName();
+                return "dashboard";   
+            } else {
+                FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Incorrect username or password","Try again");
+                FacesContext.getCurrentInstance().addMessage("error-message", loginMessage);
+                return "admin-signin";   
+            }
+        } catch (Exception e) {
             FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Incorrect username or password","Try again");
             FacesContext.getCurrentInstance().addMessage("error-message", loginMessage);
-            return "admin-signin";   
+            return "admin-signin";
         }
     }
     
     /*SIGNUP AS USER*/
     public String signup(){
         
-        String enteredId = user.getRegNumber();
-        System.out.println("\nEntered ID: "+enteredId);
-        
-        List<Users> allUser = genericDao.fetchUsers();
-        int found = 0;
-        for (Users aUser : allUser) {
-            if (aUser.getRegNumber().equals(enteredId)) {
-                found = 1;
-            } else {
-                found = 0;
+        try {
+            String enteredId = user.getRegNumber();
+            System.out.println("\nEntered ID: "+enteredId);
+
+            List<Users> allUser = genericDao.fetchUsers();
+            int found = 0;
+            for (Users aUser : allUser) {
+                if (aUser.getRegNumber().equals(enteredId)) {
+                    found = 1;
+                } else {
+                    found = 0;
+                }
             }
-        }
-        
-        if (found == 1) {
-            FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_WARN,"This ID is already registered!","You should either change the id or login");
-            FacesContext.getCurrentInstance().addMessage("signup-message", signupMessage);
-            return "signup";   
-        } else {
-            genericDao.saveUsers(user);
-            FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Account Successfully Created!","Confirm your email and login.");
+
+            if (found == 1) {
+                FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_WARN,"This ID is already registered!","You should either change the id or login");
+                FacesContext.getCurrentInstance().addMessage("signup-message", signupMessage);
+                return "signup";   
+            } else {
+                genericDao.saveUsers(user);
+                FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Account Successfully Created!","Confirm your email and login.");
+                FacesContext.getCurrentInstance().addMessage("error-message", signupMessage);
+                return "signin";   
+            }   
+        } catch (Exception e) {
+            FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Unable to create account!","Confirm your email and login.");
             FacesContext.getCurrentInstance().addMessage("error-message", signupMessage);
-            return "signin";   
-        }
+            return "signin";
+        }    
     }
     
     /*SIGNUP AS ADMIN*/
     public String signupAdmin(){
-        
-        String enteredAdminUsername = admin.getUsername();
-        System.out.println("\nEntered ID: "+enteredAdminUsername);
-        
-        List<Admins> allAdmins = genericDao.fetchAdmin();
-        int found = 0;
-        for (Admins anAdmin : allAdmins) {
-            if (anAdmin.getUsername().equals(enteredAdminUsername)) {
-                found = 1;
-            } else {
-                found = 0;
+        try{
+            String enteredAdminUsername = admin.getUsername();
+            System.out.println("\nEntered ID: "+enteredAdminUsername);
+
+            List<Admins> allAdmins = genericDao.fetchAdmin();
+            int found = 0;
+            for (Admins anAdmin : allAdmins) {
+                if (anAdmin.getUsername().equals(enteredAdminUsername)) {
+                    found = 1;
+                } else {
+                    found = 0;
+                }
             }
-        }
-        
-        if (found == 1) {
-            FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_WARN,"This username is already registered!","You should either change the id or login");
-            FacesContext.getCurrentInstance().addMessage("signup-message", signupMessage);
-            return "admin-signup";   
-        } else {
-            genericDao.saveAdmin(admin);
-            FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Account Successfully Created!","Confirm your email and login.");
+
+            if (found == 1) {
+                FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_WARN,"This username is already registered!","You should either change the id or login");
+                FacesContext.getCurrentInstance().addMessage("signup-message", signupMessage);
+                return "admin-signup";   
+            } else {
+                genericDao.saveAdmin(admin);
+                FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Account Successfully Created!","Confirm your email and login.");
+                FacesContext.getCurrentInstance().addMessage("error-message", signupMessage);
+                return "admin-signin";   
+            }
+        }catch(Exception e) {
+            FacesMessage signupMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Unable to create account!","Confirm your email and login.");
             FacesContext.getCurrentInstance().addMessage("error-message", signupMessage);
-            return "admin-signin";   
-        }
+            return "signin";
+        }    
     }
     
     /**
@@ -389,24 +407,15 @@ public class ContractModel {
     /*CREATE CONTRACT STEP1*/
     public String createContract(){
         namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
-        int found = 1;
-        for (RegistrationData info : listOfRegistrations) {
-            if (info.getRegNumber().equals(enteredId)) {
-                found++;
-            } else {
-                found = 1;
-            }
-        }
- 
-        if (found>1) {
+        try{
             retrieveStudentRegistrationInformation(enteredId);
             contract.setRegNumber(yourData.getRegNumber());
             contract.setFirstName(yourData.getFirstName());
             contract.setLastName(yourData.getLastName());
             contract.setDueAmount(yourData.getAmountDue());    
             return "create-contract";
-        } else {
-            FacesMessage userAccountMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL ,"You don't have courses in your box, Can't create a contract.","Register contract");
+        } catch(Exception e){
+            FacesMessage userAccountMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL ,"You can not create a contract. | "+e.getMessage()+"","Register contract");
             FacesContext.getCurrentInstance().addMessage("error-message", userAccountMessage);
             return "user-account";
         }
@@ -434,46 +443,71 @@ public class ContractModel {
     /*SUBMITTING THE CONTRACT*/
     public String submitContract(){
         FacesMessage submitMessage;
-        contract.setStatus("Pending");
-        if (contract.getCreationdate()!=null) {
-            genericDao.saveContract(contract);
-            submitMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Submitted!","You shall receive information about your contract lately..");
-            FacesContext.getCurrentInstance().addMessage("submit-message", submitMessage);
-            return "submittion-response";
-        } else {
+        try {
+            contract.setStatus("Pending");
+            if (contract.getCreationdate()!=null) {
+                genericDao.saveContract(contract);
+                submitMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Submitted!","You shall receive information about your contract lately..");
+                FacesContext.getCurrentInstance().addMessage("submit-message", submitMessage);
+                return "submittion-response";
+            } else {
+                submitMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to submit your contract!","Make sure all required Infomation is provided.");
+                FacesContext.getCurrentInstance().addMessage("submit-message", submitMessage);
+                return "summary";
+            }
+        } catch (Exception e) {
             submitMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to submit your contract!","Make sure all required Infomation is provided.");
             FacesContext.getCurrentInstance().addMessage("submit-message", submitMessage);
             return "summary";
         }
+        
     }
 
     /*UPDATING THE CONTRACT*/
-    public String updateContract(){
+    public String updateContract(Contracts contract){
         FacesMessage updateMessage;
-        contract.setStatus("Pending");
-        if (contract.getCreationdate()!=null) {
-            genericDao.updateContract(contract);
-            updateMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Updated!","Well Done..");
+        try {
+            if (contract.getCreationdate()!=null) {
+                genericDao.updateContract(contract);
+                updateMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Updated!","Well Done..");
+                FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
+                return "dashboard";
+            } else {
+                updateMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to update user contract!","Make sure all required Infomation is provided.");
+                FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
+                return "view-contract";
+            }
+        } catch (Exception e) {
+            updateMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to update user contract! | "+e.getMessage()+"","Make sure all required Infomation is provided.");
             FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
-            return "dashboard";
-        } else {
-            updateMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to update user contract!","Make sure all required Infomation is provided.");
-            FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
-            return "view-contract";
+            return "view-contract";        
         }
     }
 
     /*SUBMITTING THE CONTRACT*/
-    public String deleteContract(){
-        genericDao.deleteContract(contract);
-        return "dashboard";
+    public String deleteContract(Contracts contract){
+        FacesMessage deleteMessage;
+        try {
+            genericDao.deleteContract(contract);
+            return "dashboard";
+        } catch (Exception e) {
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Failed to delete contract | "+e.getMessage()+"","Well Done..");
+            FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
+            return "dashboard";
+        }
     }
     
     /*DASHBOARD*/
     public String dashboard(){
-        retrieveContracts();
-        retrieveUsers();
-        retrieveAdmins();
-        return "admin/dashboard";
+        try {
+            retrieveContracts();
+            retrieveUsers();
+            retrieveAdmins();
+            return "dashboard";
+        } catch (Exception e) {
+            FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Unable to access dashboard | "+e.getMessage()+"","Try again");
+            FacesContext.getCurrentInstance().addMessage("error-message", loginMessage);
+            return "admin-signin"; 
+        }
     }
 }

@@ -5,50 +5,51 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>AUCA Contract | View User Contract</title>
-        <link href="../admin-styles.css" rel="stylesheet" type="text/css"/>
+        <link href="admin-styles.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
         <div class="main-container">
             <f:view>
                 <h:form>
-                    <h1><h:outputText value="Create/Edit"/></h1>
+                    <h1><h:outputText value="Contract Information"/></h1>
                     <h:messages  id="error-message" class="error-message" infoClass="info" errorClass="error" fatalClass="fatal"/>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="ContractNumber:" for="contractNumber" />
-                        <h:outputText id="contractNumber" value="#{con.contract.contractNumber}" />
+                        <h:inputText id="contractNumber" value="#{con.contract.contractNumber}" />
                         <h:outputLabel value="RegNumber:" for="regNumber" />
-                        <h:outputText id="regNumber" value="#{con.contract.regNumber}"/>
+                        <h:inputText id="regNumber" value="#{con.contract.regNumber}"/>
                         <h:outputLabel value="FirstName:" for="firstName" />
-                        <h:outputText id="firstName" value="#{con.contract.firstName}"/>
+                        <h:inputText id="firstName" value="#{con.contract.firstName}"/>
                         <h:outputLabel value="LastName:" for="lastName" />
-                        <h:outputText id="lastName" value="#{con.contract.lastName}"/>
+                        <h:inputText id="lastName" value="#{con.contract.lastName}"/>
                         <h:outputLabel value="Phone:" for="phone" />
-                        <h:outputText id="phone" value="#{con.contract.phone}" />
+                        <h:inputText id="phone" value="#{con.contract.phone}" />
                         <h:outputLabel value="Email:" for="email" />
-                        <h:outputText id="email" value="#{con.contract.email}" />
+                        <h:inputText id="email" value="#{con.contract.email}" />
                         <h:outputLabel value="DueAmount:" for="dueAmount" />
-                        <h:outputText id="dueAmount" value="#{con.contract.dueAmount}" />
+                        <h:inputText id="dueAmount" value="#{con.contract.dueAmount}" />
                         <h:outputLabel value="PaidAmount:" for="paidAmount" />
-                        <h:outputText id="paidAmount" value="#{con.contract.paidAmount}" />
+                        <h:inputText id="paidAmount" value="#{con.contract.paidAmount}" />
                         <h:outputLabel value="NameOnReciept:" for="nameOnReciept" />
-                        <h:outputText id="nameOnReciept" value="#{con.contract.nameOnReciept}" />
+                        <h:inputText id="nameOnReciept" value="#{con.contract.nameOnReciept}" />
                         <h:outputLabel value="AmountPerInstallment:" for="amountPerInstallment" />
-                        <h:outputText id="amountPerInstallment" value="#{con.contract.amountPerInstallment}" />
+                        <h:inputText id="amountPerInstallment" value="#{con.contract.amountPerInstallment}" />
                         <h:outputLabel value="Creationdate:" for="creationdate" />
-                        <h:outputText id="creationdate" value="#{con.contract.creationdate}"/>
+                        <h:inputText id="creationdate" value="#{con.contract.creationdate}">
+                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                        </h:inputText>
                         <h:outputLabel value="Status:" for="status" />
-                        <h:outputText id="status" value="#{con.contract.status}" title="Status" />
                         <h:selectOneMenu value="#{con.contract.status}">
                             <f:selectItem itemLabel="Pending" itemValue="Pending"/>
                             <f:selectItem itemLabel="Approved" itemValue="Approved"/>
                             <f:selectItem itemLabel="Rejected" itemValue="Rejected"/>
                         </h:selectOneMenu>
-                        <h:commandButton value="Update" action="#{con.updateContract()}"/>
-                        <h:commandButton value="Delete" action="#{con.deleteContract()}"/>
+                        <h:commandButton value="Update" action="#{con.updateContract(contract)}"/>
+                        <h:commandButton value="Delete" action="#{con.deleteContract(contract)}"/>
                     </h:panelGrid>
+                    <h:commandButton value="Dashboard Home" action="#{con.dashboard()}"/>
                 </h:form>
             </f:view>
-
         </div>
     </h:body>
 </html>

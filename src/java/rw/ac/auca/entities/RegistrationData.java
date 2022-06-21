@@ -1,6 +1,7 @@
 package rw.ac.auca.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -88,5 +89,44 @@ public class RegistrationData implements Serializable {
         this.academicYear = academicYear;
     }
 
-     
+    @Override
+    public int hashCode() {
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RegistrationData other = (RegistrationData) obj;
+        if (this.semester != other.semester) {
+            return false;
+        }
+        if (!Objects.equals(this.regNumber, other.regNumber)) {
+            return false;
+        }
+        if (!Objects.equals(this.firstName, other.firstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.faculty, other.faculty)) {
+            return false;
+        }
+        if (!Objects.equals(this.academicYear, other.academicYear)) {
+            return false;
+        }
+        if (!Objects.equals(this.amountDue, other.amountDue)) {
+            return false;
+        }
+        return true;
+    }
 }
