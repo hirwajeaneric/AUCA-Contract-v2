@@ -15,27 +15,27 @@
                     <h:messages  id="error-message" class="error-message" infoClass="info" errorClass="error" fatalClass="fatal"/>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="ContractNumber:" for="contractNumber" />
-                        <h:inputText id="contractNumber" value="#{con.contract.contractNumber}" />
+                        <h:inputText id="contractNumber" value="#{con.contract.contractNumber}" disabled="true"/>
                         <h:outputLabel value="RegNumber:" for="regNumber" />
-                        <h:inputText id="regNumber" value="#{con.contract.regNumber}"/>
+                        <h:inputText id="regNumber" value="#{con.contract.regNumber}" disabled="true"/>
                         <h:outputLabel value="FirstName:" for="firstName" />
-                        <h:inputText id="firstName" value="#{con.contract.firstName}"/>
+                        <h:inputText id="firstName" value="#{con.contract.firstName}" disabled="true"/>
                         <h:outputLabel value="LastName:" for="lastName" />
-                        <h:inputText id="lastName" value="#{con.contract.lastName}" />
+                        <h:inputText id="lastName" value="#{con.contract.lastName}" disabled="true"/>
                         <h:outputLabel value="Phone:" for="phone" />
-                        <h:inputText id="phone" value="#{con.contract.phone}" />
+                        <h:inputText id="phone" value="#{con.contract.phone}" disabled="true"/>
                         <h:outputLabel value="Email:" for="email" />
-                        <h:inputText id="email" value="#{con.contract.email}" />
+                        <h:inputText id="email" value="#{con.contract.email}" disabled="true"/>
                         <h:outputLabel value="DueAmount:" for="dueAmount" />
-                        <h:inputText id="dueAmount" value="#{con.contract.dueAmount}" />
+                        <h:inputText id="dueAmount" value="#{con.contract.dueAmount}" disabled="true"/>
                         <h:outputLabel value="PaidAmount:" for="paidAmount" />
-                        <h:inputText id="paidAmount" value="#{con.contract.paidAmount}" />
+                        <h:inputText id="paidAmount" value="#{con.contract.paidAmount}" disabled="true"/>
                         <h:outputLabel value="NameOnReciept:" for="nameOnReciept" />
-                        <h:inputText id="nameOnReciept" value="#{con.contract.nameOnReciept}" />
+                        <h:inputText id="nameOnReciept" value="#{con.contract.nameOnReciept}" disabled="true"/>
                         <h:outputLabel value="AmountPerInstallment:" for="amountPerInstallment" />
-                        <h:inputText id="amountPerInstallment" value="#{con.contract.amountPerInstallment}" />
+                        <h:inputText id="amountPerInstallment" value="#{con.contract.amountPerInstallment}" disabled="true"/>
                         <h:outputLabel value="Creationdate:" for="creationdate" />
-                        <h:inputText id="creationdate" value="#{con.contract.creationdate}">
+                        <h:inputText id="creationdate" value="#{con.contract.creationdate}" disabled="true">
                             <f:convertDateTime pattern="dd-MM-yyyy" />
                         </h:inputText>
                         <h:outputLabel value="Status:" for="status" />
@@ -45,7 +45,7 @@
                             <f:selectItem itemLabel="Rejected" itemValue="Rejected" />
                         </h:selectOneMenu>
                         <h:commandButton value="Update" action="#{con.updateContract()}" />
-                        <h:commandButton value="Delete" action="#{con.deleteContract(contract)}" />
+                        <h:commandButton value="Delete" action="#{con.deleteContractFromView()}" />
                     </h:panelGrid>
                     <h:commandButton value="Dashboard Home" action="#{con.dashboard()}" />
                 </h:form>

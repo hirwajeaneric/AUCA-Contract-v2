@@ -49,8 +49,9 @@ public class ContractModel {
         return admin;
     }
 
-    public void setAdmin(Admins admin) {
+    public String setAdmin(Admins admin) {
         this.admin = admin;
+        return "view-admin";
     }
 
     public Users getUser() {
@@ -396,11 +397,13 @@ public class ContractModel {
     /*USER ACCOUNT*/
     public String userAccount(){
         namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
-        return "student/user-account";
+        return "user-account";
     }
     
+    /*RETURN TO USER ACCOUNT*/
     public String returnToUserAccount(){
         namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
+        getContractsById(enteredId);
         return "user-account";
     }
     
@@ -484,12 +487,83 @@ public class ContractModel {
         }
     }
 
-    /*SUBMITTING THE CONTRACT*/
+    /*DELETING A CONTRACT*/
     public String deleteContract(Contracts contract){
         FacesMessage deleteMessage;
         try {
             genericDao.deleteContract(contract);
             retrieveContracts();
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Contract deleted","Well Done..");
+            FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
+            return "dashboard";
+        } catch (Exception e) {
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to delete contract | "+e.getMessage()+"","Well Done..");
+            FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
+            return "dashboard";
+        }
+    }
+
+    /*UPDATING ADMINISTRATORS*/
+    public String updateAdmins(){
+        FacesMessage updateMessage;
+        try {
+            if (admin.getEmail()!=null) {
+                genericDao.updateAdmin(admin);
+                updateMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Administrator Updated!","Well Done..");
+                FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
+                return "dashboard";
+            } else {
+                updateMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to update admin info!","Make sure all required Infomation is provided.");
+                FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
+                return "view-admin";
+            }
+        } catch (Exception e) {
+            updateMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to update user contract! | "+e.getMessage()+"","Make sure all required Infomation is provided.");
+            FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
+            return "view-admin";        
+        }
+    }
+
+    /*REMOVING AN ADMIN*/
+    public String deleteAdmin(Admins admin){
+        FacesMessage deleteMessage;
+        try {
+            genericDao.deleteAdmin(admin);
+            retrieveAdmins();
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Admin removed","Well Done..");
+            FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
+            return "dashboard";
+        } catch (Exception e) {
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to remove admin | "+e.getMessage()+"","Well Done..");
+            FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
+            return "dashboard";
+        }
+    }
+
+    /*REMOVING AN ADMIN FROM VIEW*/
+    public String deleteAdminFromView(){
+        FacesMessage deleteMessage;
+        try {
+            genericDao.deleteAdmin(admin);
+            retrieveAdmins();
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Admin removed","Well Done..");
+            FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
+            return "dashboard";
+        } catch (Exception e) {
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to remove admin | "+e.getMessage()+"","Well Done..");
+            FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
+            return "dashboard";
+        }
+    }
+
+    /*DELETE THE CONTRACT FROM VIEW*/
+    public String deleteContractFromView(){
+        FacesMessage deleteMessage;
+        try {
+            genericDao.deleteContract(contract);
+            retrieveContracts();
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Contract Deleted","Well Done..");
+            FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
         } catch (Exception e) {
             deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Failed to delete contract | "+e.getMessage()+"","Well Done..");
