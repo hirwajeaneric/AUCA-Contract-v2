@@ -4,101 +4,101 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>AUCA Contract | Dashboard</title>
+        <link href="admin-styles.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
         DASHBOARD
-        
+        <h:messages  id="error-message" class="error-message" infoClass="info" errorClass="error" fatalClass="fatal"/>
+
         <f:view>
             <h:form>
-                <h1><h:outputText value="Contracts"/></h1>
-                <h:dataTable value="#{con.listOfContracts}" var="contract">
+                <h1><h:outputText value="List of Contracts"/></h1>
+                <h:dataTable value="#{con.listOfContracts}" var="item">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="ContractNumber"/>
                         </f:facet>
-                        <h:outputText value="#{contract.contractNumber}"/>
+                        <h:outputText value="#{item.contractNumber}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="RegNumber"/>
                         </f:facet>
-                        <h:outputText value="#{contract.regNumber}"/>
+                        <h:outputText value="#{item.regNumber}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="FirstName"/>
                         </f:facet>
-                        <h:outputText value="#{contract.firstName}"/>
+                        <h:outputText value="#{item.firstName}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="LastName"/>
                         </f:facet>
-                        <h:outputText value="#{contract.lastName}"/>
+                        <h:outputText value="#{item.lastName}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Phone"/>
                         </f:facet>
-                        <h:outputText value="#{contract.phone}"/>
+                        <h:outputText value="#{item.phone}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Email"/>
                         </f:facet>
-                        <h:outputText value="#{contract.email}"/>
+                        <h:outputText value="#{item.email}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="DueAmount"/>
                         </f:facet>
-                        <h:outputText value="#{contract.dueAmount}"/>
+                        <h:outputText value="#{item.dueAmount}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="PaidAmount"/>
                         </f:facet>
-                        <h:outputText value="#{contract.paidAmount}"/>
+                        <h:outputText value="#{item.paidAmount}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="NameOnReciept"/>
                         </f:facet>
-                        <h:outputText value="#{contract.nameOnReciept}"/>
+                        <h:outputText value="#{item.nameOnReciept}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="AmountPerInstallment"/>
                         </f:facet>
-                        <h:outputText value="#{contract.amountPerInstallment}"/>
+                        <h:outputText value="#{item.amountPerInstallment}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Creationdate"/>
                         </f:facet>
-                        <h:outputText value="#{contract.creationdate}"/>
+                        <h:outputText value="#{item.creationdate}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Status"/>
                         </f:facet>
-                        <h:outputText value="#{contract.status}"/>
+                        <h:outputText value="#{item.status}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Action"/>
                         </f:facet>
-                        <h:commandButton value="View" action="#{con.setContract(contract)}"/>
-                        <h:commandButton value="Delete" action=""/>
+                        <h:commandButton value="View Contract" action="#{con.setContract(item)}"/>
+                        <h:commandButton value="Delete Contract" action="#{con.deleteContract(contract)}"/>
                     </h:column>
                 </h:dataTable>
             </h:form>
         </f:view>
         
         <f:view>
-
-
             <h:form>
                 <h1><h:outputText value="Registration Data"/></h1>
                 <h:dataTable value="#{con.listOfRegistrations}" var="item">
@@ -150,8 +150,6 @@
 
         
         <f:view>
-
-
             <h:form>
                 <h1><h:outputText value="Registered Users"/></h1>
                 <h:dataTable value="#{con.listOfUsers}" var="item">

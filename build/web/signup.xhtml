@@ -7,9 +7,10 @@
         <title>AUCA Contract | Signup</title>
         <link href="main.css" rel="stylesheet" type="text/css"/>
     </h:head>
-    <h:body>
-        <f:view>
-            <h:form>
+    <h:body class="signup-signin-body">
+        <div class="sign-container">
+            <f:view>
+            <h:form class="signup-form">
                 <h1><h:outputText value="SIGN UP"/></h1>
                 <h:messages  id="signup-message" class="signup-message" infoClass="info" errorClass="error" fatalClass="fatal"/>
                 <h:panelGrid columns="2">
@@ -30,6 +31,7 @@
                 <p>Already has an account? <h:link value="login" outcome="signin"/></p>
             </h:form>
         </f:view>
+        </div>
     </h:body>
 </html>
 

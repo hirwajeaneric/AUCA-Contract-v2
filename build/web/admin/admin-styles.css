@@ -1,0 +1,50 @@
+/* 
+    Created on : Jun 21, 2022, 8:47:29 AM
+    Author     : hirwa
+*/
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fatal {
+    padding: 6px 10px;
+    width: 100%;
+    background-color: #ff9999;
+    border-radius: 5px;
+    margin: 20px 0;
+    color: #ff0000;
+    font-size: 80%;
+    display: block;
+} 
+
+.error {
+    padding: 6px 10px;
+    width: 100%;
+    background-color: #ffd9b3;
+    border-radius: 5px;
+    margin: 20px 0;
+    color: #ff9933;
+    font-size: 80%;
+    display: block;
+} 
+
+.info {
+    padding: 6px 10px;
+    width: 100%;
+    background-color: rgb(204, 255, 204);
+    border-radius: 5px;
+    margin: 20px 0;
+    color: green;
+    font-size: 80%;
+    display: block;
+} 

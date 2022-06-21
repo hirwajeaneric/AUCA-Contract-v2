@@ -81,6 +81,7 @@ public class GenericDao {
         }
     }
     
+    
     /*METHODS FOR UPDATING*/
     public void updateAdmin(Admins admin){
         try {
@@ -125,6 +126,7 @@ public class GenericDao {
         } catch (HibernateException e) {
         }
     }
+    
     
     /*METHODS FOR DELETING*/
     public void deleteAdmin(Admins admin){
@@ -171,6 +173,7 @@ public class GenericDao {
         }
     }
  
+    
     /*METHOD FOR RETRIEVING LISTS OF DATA*/
     public List<Admins> fetchAdmin(){
         List<Admins> listOfAdmins = null;
@@ -249,6 +252,22 @@ public class GenericDao {
                 return null;
             } else {
                 return foundUser;
+            }
+        } catch (HibernateException e) {
+            return null;
+        }
+    }
+
+    public Admins findAdminPassword(String regNumber){
+        Admins foundAdmin = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            foundAdmin = (Admins)session.get(Admins.class, regNumber);
+            session.close();
+            if (foundAdmin==null) {
+                return null;
+            } else {
+                return foundAdmin;
             }
         } catch (HibernateException e) {
             return null;
