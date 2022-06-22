@@ -7,25 +7,160 @@
         <title>AUCA Contract | Admin Signin</title>
         <link href="admin-styles.css" rel="stylesheet" type="text/css"/>
         <style>
-            body{
-                background-color: gray;
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family: sans-serif;
             }
-        </style>        
+
+            body,
+            .sign-container{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /** AUTHENTICATION ERROR MESSAGE*/
+            .fatal {
+                padding: 6px 10px;
+                width: 100%;
+                background-color: #ff9999;
+                border-radius: 5px;
+                margin: 20px 0;
+                color: #ff0000;
+                font-size: 80%;
+                display: block;
+            } 
+
+            .error {
+                padding: 6px 10px;
+                width: 100%;
+                background-color: #fff0e1;
+                border-radius: 5px;
+                margin: 20px 0;
+                color: orangered;
+                font-size: 80%;
+                display: block;
+            } 
+
+            .info {
+                padding: 6px 10px;
+                width: 100%;
+                background-color: rgb(204, 255, 204);
+                border-radius: 5px;
+                margin: 20px 0;
+                color: green;
+                font-size: 80%;
+                display: block;
+            } 
+
+            /*SIGNIN AND SIGNUP FORMS*/
+            .signup-signin-body {
+                background: url("./005-G3.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+                height: 100%;
+                overflow: visible;
+            }
+
+            .sign-container {
+                background-color: rgba(0, 0, 0, 0.5);
+                width: 100%;
+                height: 100%;
+             }
+
+            .signup-form,
+            .signin-form {
+                padding: 50px;
+                background-color: black;
+                color: white;
+                margin: 120px 0;
+            }
+
+            /*STYLES OF H1s ON ALL FORMS*/
+            .headerOnForm {
+                text-align: center;
+                margin: 0 0 20px;
+            }
+
+            /*STYLES OF ALL SUBMIT BUTTONS USED ON THE LOGIN, SIGNUP,...*/
+            input[type="submit"] {
+                background-color: #0087ee;
+                /*border: 2px solid white;*/
+                color:white;
+                border: none;
+                padding: 8px 16px;
+                font-weight: 600;
+                margin: 20px 0;
+                width: 100%;
+            }
+
+            input[type="submit"]:hover {
+                background-color: orange;
+                color:black;
+            }
+
+            /*STYLES OF INPUT FIELDS ON FORMS*/
+            input[type="text"],
+            input[type="password"], 
+            select {
+                padding: 5px 10px;
+            }
+
+            /*STYLES OF BELLOW MESSAGES*/
+            .text-messages-auth {
+                text-align: center;
+            }
+
+            /*STYLES OF LINKS*/
+            a {
+                text-decoration:none;
+                color: orange;
+            }
+
+            a:hover {
+                color: brown;
+            }
+
+            /*STYLES FOR THE DATE STYLE OF THE FORM*/
+            td {
+                padding: 10px 5px;
+            }
+
+            /*STYLES OF THE CONTRACT*/
+
+            .top-navigation-bar {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                background-color: #004080;
+                padding: 20px 0;
+                color:white;
+            }
+        </style>
     </h:head>
-    <h:body>
+    <h:body class="signup-signin-body">
         <div class="sign-container">
             <f:view>
             <h:form class="signin-form">
-                <h1><h:outputText value="LOGIN"/></h1>
+                <div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center; margin-bottom: 30px; padding-bottom: 30px; border-bottom: 2px solid #0087ee;">
+                    <img src="cropped-AUCA-logo-wide-webblue-2-1-34.png" alt="AUCA LOGO" style="width: 80px;"/>
+                    <h1 style="color: white; font-size: 230%; ">AUCA<br></br>CONTRACT</h1>
+                </div>
+                <h1 class="headerOnForm"><h:outputText value="ADMIN LOGIN"/></h1>
                 <h:messages  id="error-message" class="error-message" infoClass="info" errorClass="error" fatalClass="fatal"/>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="UserName:" for="UserName" />
                     <h:inputText id="UserName" value="#{con.checkadmin.idC}" title="UserName" required="true"/>
                     <h:outputLabel value="Password:" for="createPassword" />
                     <h:inputSecret id="createPassword" value="#{con.checkadmin.passwordC}" title="CreatePassword" required="true"/>
-                    <h:commandButton value="LOGIN" action="#{con.loginAdmin()}"/>
                 </h:panelGrid>
-                <p>Don't have an account? <h:link value="Sign up" outcome="admin-signup"/></p>
+                <h:commandButton value="LOGIN" action="#{con.loginAdmin()}"/>
+                <p class="text-messages-auth">Don't have an account? <h:link value="Sign up" outcome="admin-signup"/></p>
             </h:form>
         </f:view>
         </div>
