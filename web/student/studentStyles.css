@@ -140,12 +140,137 @@ td {
 
 /*STYLES OF THE CONTRACT*/
 
-.top-navigation-bar {
+.top-navigation-bar, 
+.logo,
+.navigationForm,
+.username {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-items: center;
+}
+
+.top-navigation-bar {
     background-color: #004080;
-    padding: 20px 0;
+    padding: 2px 0;
     color:white;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.logo,
+.navigationForm,
+.username {
+    justify-content: space-between;
+}
+
+.go-home-link {
+    color: white;
+}
+
+.go-home-link:hover {
+    color: white;
+    padding: 7px 0;
+    border-bottom: 2px solid white;
+}
+
+.navigationForm {
+    width: 30%;
+}
+
+.navigationForm input[type="submit"] {
+    width: 140px;
+    background-color: white;
+    color: #004080;
+    background-color: none;
+    border: none;
+}
+
+.navigationForm input[type="submit"]:hover {
+    background-color: brown;
+    color: white;
+}
+
+.logo img {
+    width: 50px;
+}
+
+.username img {
+    width: 40px;
+}
+
+.logo img,
+.username img,
+.go-home-link, 
+.navigationForm:nth-child(2){
+    margin-right: 10px;
+}
+
+
+
+
+
+
+/*STYLES FOR DETAILS IN THE CONTAINER OF EVERY PAGE */
+.page-title {
+    font-size: 300%;
+    text-align: center;
+    margin: 40px 0 40px;
+}
+
+h2 {
+    margin-bottom: 60px;
+}
+
+
+
+
+/*STYLES FOR THE STUDENT TABLE*/
+.displayTable1 {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+}
+
+.displayTable1 thead tr {
+    background-color: #0087ee;
+    color: #ffffff;
+    text-align: left;
+}
+
+.displayTable1 th,
+.displayTable1 td {
+    padding: 12px 15px;
+}
+
+.displayTable1 tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.displayTable1 tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    padding: 6px 7px;
+}
+
+.displayTable1 tbody tr:last-of-type {
+    border-bottom: 2px solid #0087ee;
+}
+
+
+
+
+
+/*FORM TO CONFIRM THE CONTRACT*/
+.confirm-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contract-confirmation-form {
+    width: 75%;
+    padding: 60px;
+    background-color: wheat;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
