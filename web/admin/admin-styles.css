@@ -136,17 +136,141 @@ td {
 
 
 
-
-
-
-/*STYLES OF THE CONTRACT*/
-
-.top-navigation-bar {
+/*STYLES FOR THE DASHBOARD*/
+.top-navigation-bar, 
+.logo,
+.dashboard-title,
+.username {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-items: center;
-    background-color: #004080;
-    padding: 20px 0;
+}
+
+.top-navigation-bar {
+    background-color: black;
+    padding: 2px 0;
     color:white;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.logo,
+.username {
+    justify-content: space-between;
+}
+
+.go-home-link {
+    color: #0087ee;
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+.go-home-link:hover {
+    color: orange;
+}
+
+.logo img {
+    width: 50px;
+}
+
+.username img {
+    width: 40px;
+}
+
+.logo img,
+.username img {
+    margin-right: 10px;
+}
+
+
+
+
+
+
+/*STYLES FOR DETAILS IN THE CONTAINER OF EVERY PAGE */
+.page-title {
+    font-size: 300%;
+    text-align: center;
+    margin: 40px 0 40px;
+}
+
+h2 {
+    margin-bottom: 40px;
+}
+
+
+
+
+
+/*STYLES FOR ELEMENTS INSIDE THE DASHBOARD*/
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+h1 {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.contract-table,
+.registration-table,
+.user-table,
+.admin-table {
+   border-collapse: collapse;
+   font-size: 0.9em;
+   font-family: sans-serif;
+   max-width: 100%;
+   margin-bottom: 40px;
+}
+
+.contract-table,
+.registration-table,
+.user-table,
+.admin-table {
+    text-align: left;
+}
+
+.contract-table th,
+.contract-table td,
+.registration-table th,
+.registration-table td,
+.user-table th,
+.user-table td,
+.admin-table th
+.admin-table td{
+    padding: 12px 15px;
+}
+
+.contract-table tbody tr,
+.registration-table tbody tr,
+.user-table tbody tr,
+.admin-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.contract-table tbody tr:nth-last-of-type(even),
+.registration-table tbody tr:nth-last-of-type(even),
+.user-table tbody tr:nth-last-of-type(even),
+.admin-table tbody tr:nth-last-of-type(even) {
+    background-color: #e6eeff;
+    padding: 6px 7px;
+}
+
+.contract-table tbody tr:last-of-type,
+.registration-table tbody tr:last-of-type,
+.user-table tbody tr:last-of-type,
+.admin-table tbody tr:last-of-type {
+    border-bottom: 2px solid #0087ee;
+}
+
+.contract-table input[type="submit"],
+.registration-table input[type="submit"],
+.user-table input[type="submit"],
+.admin-table input[type="submit"]{
+    padding: 10px;
+    width: 60px;
+    margin: 0;
 }

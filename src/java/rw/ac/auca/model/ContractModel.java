@@ -1,8 +1,15 @@
 package rw.ac.auca.model;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
@@ -427,7 +434,13 @@ public class ContractModel {
     
     /*CALCULATING AMOUNT PER INSTALLMENT*/
     public String calculateAmountPerInstallment(){
-        contract.setAmountPerInstallment((contract.getDueAmount()-contract.getPaidAmount())/3);
+        double installmentAmount = (contract.getDueAmount()-contract.getPaidAmount())/3;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        String formatted = df.format(installmentAmount);
+        double amount = Double.parseDouble(formatted);
+        
+        contract.setAmountPerInstallment(amount);
         return "create-contract";
     }
     
@@ -438,7 +451,14 @@ public class ContractModel {
     }
     
     public String goToConfirm(){
-        contract.setCreationdate(new Date());
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String dateOfToday = formatter.format(date);
+        try {
+            contract.setCreationdate(formatter.parse(dateOfToday));
+        } catch (ParseException ex) {
+            Logger.getLogger(ContractModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
         return "confirm-contract";
     }
