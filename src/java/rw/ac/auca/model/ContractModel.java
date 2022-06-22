@@ -1,17 +1,14 @@
 package rw.ac.auca.model;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
-import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -425,7 +422,7 @@ public class ContractModel {
             contract.setDueAmount(yourData.getAmountDue());    
             return "create-contract";
         } catch(Exception e){
-            FacesMessage userAccountMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL ,"You can not create a contract. | "+e.getMessage()+"","Register contract");
+            FacesMessage userAccountMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL ,"You can not create a contract. | You don't have courses in your box","Register contract");
             FacesContext.getCurrentInstance().addMessage("error-message", userAccountMessage);
             return "user-account";
         }

@@ -15,7 +15,7 @@
                 <h1>AUCA Contract</h1>
             </div>
             <h:form styleClass="navigationForm">
-                <h:link value="Go To Home" outcome="/signin" class="go-home-link"/>
+                <h:link value="Logout" outcome="/signin" class="go-home-link"/>
                 <h:commandButton value="User Account" action="#{con.returnToUserAccount()}"/>
                 <h:commandButton value="Create Contract" action="#{con.createContract()}"/>
             </h:form>
@@ -34,9 +34,9 @@
                     <h:messages  id="contract-message" class="contract-message" infoClass="info" errorClass="error" fatalClass="fatal"/>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="Phone:" for="phone" />
-                        <h:inputText id="phone" value="#{con.contract.phone}" title="Phone" required="true"/>
+                        <h:inputText id="phone" value="#{con.contract.phone}" title="Phone" required="true" autocomplete="off"/>
                         <h:outputLabel value="Email:" for="email" />
-                        <h:inputText id="email" value="#{con.contract.email}" title="Email" required="true"/>
+                        <h:inputText id="email" value="#{con.contract.email}" title="Email" required="true" autocomplete="off"/>
                         
                         <h:outputLabel value="DueAmount:" for="dueAmount" />
                         <h:inputText id="dueAmount" value="#{con.contract.dueAmount}" title="DueAmount" required="true"/>
