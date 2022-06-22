@@ -1,0 +1,329 @@
+/* 
+    Created on : Jun 20, 2022, 10:56:37 AM
+    Author     : hirwa
+*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body,
+.sign-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/** AUTHENTICATION ERROR MESSAGE*/
+
+.fatal {
+    padding: 6px 10px;
+    width: 100%;
+    background-color: #ff9999;
+    border-radius: 5px;
+    margin: 20px 0;
+    color: #ff0000;
+    font-size: 80%;
+    display: block;
+} 
+
+.error {
+    padding: 6px 10px;
+    width: 100%;
+    background-color: #fff0e1;
+    border-radius: 5px;
+    margin: 20px 0;
+    color: #ff9933;
+    font-size: 80%;
+    display: block;
+} 
+
+.info {
+    padding: 6px 10px;
+    width: 100%;
+    background-color: rgb(204, 255, 204);
+    border-radius: 5px;
+    margin: 20px 0;
+    color: green;
+    font-size: 80%;
+    display: block;
+} 
+ 
+
+
+/*SIGNIN AND SIGNUP FORMS*/
+.signup-signin-body {
+    background: url("./005-G3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 100%;
+    overflow: visible;
+}
+
+.sign-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+ }
+
+.signup-form,
+.signin-form {
+    padding: 50px;
+    background-color: white;
+    margin: 120px 0;
+}
+
+
+/*STYLES OF H1s ON ALL FORMS*/
+.headerOnForm {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+/*STYLES OF ALL SUBMIT BUTTONS USED ON THE LOGIN, SIGNUP,...*/
+input[type="submit"] {
+    background-color: black;
+    color:white;
+    border: none;
+    padding: 8px 16px;
+    font-weight: 600;
+    margin: 20px 0;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background-color: orange;
+    color:black;
+}
+
+/*STYLES OF INPUT FIELDS ON FORMS*/
+input[type="text"],
+input[type="password"], 
+select {
+    padding: 5px 10px;
+}
+
+/*STYLES OF BELLOW MESSAGES*/
+.text-messages-auth {
+    text-align: center;
+}
+
+/*STYLES OF LINKS*/
+a {
+    text-decoration:none;
+    color: #004080;
+}
+
+a:hover {
+    color: brown;
+}
+
+/*STYLES FOR THE DATE STYLE OF THE FORM*/
+td {
+    padding: 10px 5px;
+}
+
+
+
+
+
+
+
+
+
+/*STYLES OF THE CONTRACT*/
+
+.top-navigation-bar, 
+.logo,
+.navigationForm,
+.username {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.top-navigation-bar {
+    background-color: #004080;
+    padding: 2px 0;
+    color:white;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.logo,
+.navigationForm,
+.username {
+    justify-content: space-between;
+}
+
+.go-home-link {
+    color: white;
+}
+
+.go-home-link:hover {
+    color: white;
+    padding: 7px 0;
+    border-bottom: 2px solid white;
+}
+
+.navigationForm {
+    width: 30%;
+}
+
+.navigationForm input[type="submit"] {
+    width: 140px;
+    background-color: white;
+    color: #004080;
+    background-color: none;
+    border: none;
+}
+
+.navigationForm input[type="submit"]:hover {
+    background-color: brown;
+    color: white;
+}
+
+.logo img {
+    width: 50px;
+}
+
+.username img {
+    width: 40px;
+}
+
+.logo img,
+.username img,
+.go-home-link, 
+.navigationForm:nth-child(2){
+    margin-right: 10px;
+}
+
+
+
+
+
+
+/*STYLES FOR DETAILS IN THE CONTAINER OF EVERY PAGE */
+.page-title {
+    font-size: 300%;
+    text-align: center;
+    margin: 40px 0 40px;
+}
+
+h2 {
+    margin-bottom: 40px;
+}
+
+
+
+
+/*STYLES FOR THE STUDENT TABLE*/
+.displayTable1 {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+}
+
+.displayTable1 thead tr {
+    background-color: #0087ee;
+    color: #ffffff;
+    text-align: left;
+}
+
+.displayTable1 th,
+.displayTable1 td {
+    padding: 12px 15px;
+}
+
+.displayTable1 tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.displayTable1 tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    padding: 6px 7px;
+}
+
+.displayTable1 tbody tr:last-of-type {
+    border-bottom: 2px solid #0087ee;
+}
+
+
+
+
+
+/*FORM TO CONFIRM THE CONTRACT*/
+.confirm-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contract-confirmation-form {
+    width: 75%;
+    padding: 80px;
+    background-color: wheat;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 60px;
+}
+
+.contract-confirmation-form .contract-head,
+.contract-confirmation-form .user-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.contract-confirmation-form .user-details{
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.contract-head h1 {
+    margin-left: 20px;
+}
+
+h3 {
+    text-align: center;
+    margin: 30px 0;
+}
+
+
+
+/*Styles for the contract table*/
+.contract-table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    margin-bottom: 20px;
+}
+
+.contract-table thead tr {
+    text-align: left;
+}
+
+.contract-table th,
+.contract-table td {
+    padding: 12px 15px;
+}
+
+.contract-statement {
+    line-height: 25px;
+}
+
+/*Contract signature*/
+.signature {
+    margin: 30px 0;
+    
+}

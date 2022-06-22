@@ -5,20 +5,20 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>AUCA Contract | Result</title>
-        <link href="../main.css" rel="stylesheet" type="text/css"/>
+        <link href="studentStyles.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-        <nav>
-            <div>
+        <nav class="top-navigation-bar">
+            <div class="logo">
                 <img src="cropped-AUCA-logo-wide-webblue-2-1-34.png" alt="Auca Logo"/>
                 <h1>AUCA Contract</h1>
             </div>
             <h:form styleClass="navigationForm">
-                <h:link value="Go To Home" outcome="/signin"/>
+                <h:link value="Go To Home" outcome="/signin" class="go-home-link"/>
                 <h:commandButton value="User Account" action="#{con.returnToUserAccount()}"/>
                 <h:commandButton value="Create Contract" action="#{con.createContract()}"/>
             </h:form>
-            <div>
+            <div class="username">
                 <img src="usericon2.png"/>
                 <h:form styleClass="usernameForm">
                     <h:outputText value="#{con.namesOfLoggedInUser}"/>

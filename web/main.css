@@ -139,3 +139,13 @@ td {
 
 
 /*STYLES OF THE CONTRACT*/
+
+.top-navigation-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #004080;
+    padding: 20px 0;
+    color:white;
+}
