@@ -493,7 +493,7 @@ public class ContractModel {
         try {
             genericDao.deleteContract(contract);
             retrieveContracts();
-            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Contract deleted","Well Done..");
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract deleted","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
         } catch (Exception e) {
@@ -546,7 +546,7 @@ public class ContractModel {
         try {
             genericDao.deleteAdmin(admin);
             retrieveAdmins();
-            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Admin removed","Well Done..");
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Admin removed","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
         } catch (Exception e) {
@@ -562,7 +562,7 @@ public class ContractModel {
         try {
             genericDao.deleteContract(contract);
             retrieveContracts();
-            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Contract Deleted","Well Done..");
+            deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Deleted","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
         } catch (Exception e) {

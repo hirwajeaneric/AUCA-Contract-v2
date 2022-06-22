@@ -34,20 +34,20 @@
                 </div>
                 <h3>Contract Of Payment</h3>
                 <div class="user-details">
-                    <p class="studentNumber">Student Number: <h:outputText value="#{con.contract.regNumber}"/></p>
-                    <p class="studentNumber">Name: <h:outputText value="#{con.namesOfLoggedInUser}"/></p>
+                    <p class="studentNumber">Student Number: <strong><h:outputText value="#{con.contract.regNumber}"/></strong></p>
+                    <p class="studentNumber">Name: <strong><h:outputText value="#{con.namesOfLoggedInUser}"/></strong></p>
                 </div>
-                <table class="contract-table">
+                <table class="contract-table" border="1">
                     <tr>
-                        <td></td>
-                        <td>Total to be paid</td>
-                        <td>Payment Made</td>
-                        <td>Inst 1</td>
-                        <td>Inst 2</td>
-                        <td>Inst 3</td>
+                        <th></th>
+                        <th>Total to be paid</th>
+                        <th>Payment Made</th>
+                        <th>Period 1</th>
+                        <th>Period 2</th>
+                        <th>Period 3</th>
                     </tr>
                     <tr>
-                        <td>Amount</td>
+                        <th>Amount</th>
                         <td><h:outputText value="#{con.contract.dueAmount}"/></td>
                         <td><h:outputText value="#{con.contract.paidAmount}"/></td>
                         <td><h:outputText value="#{con.contract.amountPerInstallment}"/></td>
@@ -55,8 +55,8 @@
                         <td><h:outputText value="#{con.contract.amountPerInstallment}"/></td>
                     </tr>
                 </table>
-                <p>
-                    I <h:outputText value="#{con.namesOfLoggedInUser}"/> hereby acknowledge that as of <h:outputText value="#{con.contract.creationdate}"/>, I registered with the Adventist University of Central Africa with 6 credits and I promise to pay the total amount of the school fees on installment payment at the date as specified above.<br></br>
+                <p class="contract-statement">
+                    I <strong><h:outputText value="#{con.namesOfLoggedInUser}"/></strong> hereby acknowledge that as of <strong><h:outputText value="#{con.contract.creationdate}"/></strong>, I registered with the Adventist University of Central Africa with 6 credits and I promise to pay the total amount of the school fees on installment payment at the date as specified above.<br></br>
                     That I accept and fully understand that tuition and fees paid upon registration is not refundable on whatever reason and that 5% penalty per month on the amount due will be charged on delayed payment.
                 </p>
                 <div class="signature">
