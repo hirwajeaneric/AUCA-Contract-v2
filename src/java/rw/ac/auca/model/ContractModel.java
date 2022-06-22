@@ -492,6 +492,7 @@ public class ContractModel {
         try {
             if (contract.getCreationdate()!=null) {
                 genericDao.updateContract(contract);
+                namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
                 updateMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Updated!","Well Done..");
                 FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
                 return "dashboard";
@@ -513,6 +514,7 @@ public class ContractModel {
         try {
             genericDao.deleteContract(contract);
             retrieveContracts();
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
             deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract deleted","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
@@ -529,6 +531,7 @@ public class ContractModel {
         try {
             if (admin.getEmail()!=null) {
                 genericDao.updateAdmin(admin);
+                namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
                 updateMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Administrator Updated!","Well Done..");
                 FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
                 return "dashboard";
@@ -550,6 +553,7 @@ public class ContractModel {
         try {
             genericDao.deleteAdmin(admin);
             retrieveAdmins();
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
             deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Admin removed","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
@@ -566,6 +570,7 @@ public class ContractModel {
         try {
             genericDao.deleteAdmin(admin);
             retrieveAdmins();
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
             deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Admin removed","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
@@ -582,6 +587,7 @@ public class ContractModel {
         try {
             genericDao.deleteContract(contract);
             retrieveContracts();
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
             deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Deleted","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
@@ -599,6 +605,7 @@ public class ContractModel {
             retrieveRegistrationData();
             retrieveUsers();
             retrieveAdmins();
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
             return "dashboard";
         } catch (Exception e) {
             FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL ,"Unable to access dashboard | "+e.getMessage()+"","Try again");
