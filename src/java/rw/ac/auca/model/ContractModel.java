@@ -1,8 +1,15 @@
 package rw.ac.auca.model;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
@@ -427,7 +434,13 @@ public class ContractModel {
     
     /*CALCULATING AMOUNT PER INSTALLMENT*/
     public String calculateAmountPerInstallment(){
-        contract.setAmountPerInstallment((contract.getDueAmount()-contract.getPaidAmount())/3);
+        double installmentAmount = (contract.getDueAmount()-contract.getPaidAmount())/3;
+        
+        DecimalFormat df = new DecimalFormat("#.##");
+        String formatted = df.format(installmentAmount);
+        double amount = Double.parseDouble(formatted);
+        
+        contract.setAmountPerInstallment(amount);
         return "create-contract";
     }
     
@@ -438,7 +451,14 @@ public class ContractModel {
     }
     
     public String goToConfirm(){
-        contract.setCreationdate(new Date());
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String dateOfToday = formatter.format(date);
+        try {
+            contract.setCreationdate(formatter.parse(dateOfToday));
+        } catch (ParseException ex) {
+            Logger.getLogger(ContractModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         namesOfLoggedInUser = fetchedUser.getFirstName()+" "+fetchedUser.getLastName();
         return "confirm-contract";
     }
@@ -472,6 +492,7 @@ public class ContractModel {
         try {
             if (contract.getCreationdate()!=null) {
                 genericDao.updateContract(contract);
+                namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
                 updateMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Updated!","Well Done..");
                 FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
                 return "dashboard";
@@ -493,6 +514,7 @@ public class ContractModel {
         try {
             genericDao.deleteContract(contract);
             retrieveContracts();
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
             deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract deleted","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
@@ -509,6 +531,7 @@ public class ContractModel {
         try {
             if (admin.getEmail()!=null) {
                 genericDao.updateAdmin(admin);
+                namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
                 updateMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Administrator Updated!","Well Done..");
                 FacesContext.getCurrentInstance().addMessage("error-message", updateMessage);
                 return "dashboard";
@@ -530,6 +553,7 @@ public class ContractModel {
         try {
             genericDao.deleteAdmin(admin);
             retrieveAdmins();
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
             deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Admin removed","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
@@ -546,6 +570,7 @@ public class ContractModel {
         try {
             genericDao.deleteAdmin(admin);
             retrieveAdmins();
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
             deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Admin removed","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
@@ -562,6 +587,7 @@ public class ContractModel {
         try {
             genericDao.deleteContract(contract);
             retrieveContracts();
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
             deleteMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,"Contract Deleted","Well Done..");
             FacesContext.getCurrentInstance().addMessage("error-message", deleteMessage);
             return "dashboard";
@@ -579,6 +605,7 @@ public class ContractModel {
             retrieveRegistrationData();
             retrieveUsers();
             retrieveAdmins();
+            namesOfLoggedInAdmin = fetchedAdmin.getFirstName()+" "+fetchedAdmin.getFirstName();
             return "dashboard";
         } catch (Exception e) {
             FacesMessage loginMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL ,"Unable to access dashboard | "+e.getMessage()+"","Try again");

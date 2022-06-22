@@ -6,8 +6,83 @@
     <h:head>
         <title>AUCA Contract | View User Contract</title>
         <link href="admin-styles.css" rel="stylesheet" type="text/css"/>
+        <style>
+            /*STYLES FOR THE TOP BAR AND NAVIGATION*/
+            
+            .top-navigation-bar, 
+            .logo,
+            .dashboard-title,
+            .username {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .top-navigation-bar {
+                background-color: black;
+                padding: 10px 0;
+                color:white;
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .logo,
+            .username {
+                justify-content: space-between;
+            }
+
+            .go-home-link {
+                color: #0087ee;
+                text-decoration: none;
+                padding: 0 10px;
+            }
+
+            .go-home-link:hover {
+                color: orange;  
+            }
+
+            .logo img {
+                width: 50px;
+            }
+
+            .username img {
+                width: 40px;
+            }
+
+            .logo img,
+            .username img {
+                margin-right: 10px;
+            }
+
+            /*STYLES FOR DETAILS IN THE CONTAINER OF EVERY PAGE */
+            .page-title {
+                font-size: 300%;
+                text-align: center;
+                margin: 40px 0 40px;
+            }
+
+            h2 {
+                margin-bottom: 40px;
+            }
+        </style>        
     </h:head>
     <h:body>
+        <nav class="top-navigation-bar">
+            <div class="logo">
+                <img src="cropped-AUCA-logo-wide-webblue-2-1-34.png" alt="Auca Logo"/>
+                <h1>AUCA Contract</h1>
+            </div>
+            <p class="dashboard-title">DASHBOARD</p>
+            <div class="username">
+                <img src="usericon2.png"/>
+                <h:form styleClass="usernameForm">
+                    <h:outputText value="#{con.namesOfLoggedInAdmin}"/>
+                </h:form>
+                <h:form>
+                    <h:link value="Log out" outcome="admin-signin" class="go-home-link"/>
+                </h:form>
+            </div>
+        </nav>
         <div class="main-container">
             <f:view>
                 <h:form>

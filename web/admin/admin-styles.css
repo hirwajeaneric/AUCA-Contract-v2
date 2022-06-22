@@ -2,19 +2,24 @@
     Created on : Jun 21, 2022, 8:47:29 AM
     Author     : hirwa
 */
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: sans-serif;
 }
 
-body {
+body,
+.sign-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
+
+
+
+/** AUTHENTICATION ERROR MESSAGE*/
 
 .fatal {
     padding: 6px 10px;
@@ -30,7 +35,7 @@ body {
 .error {
     padding: 6px 10px;
     width: 100%;
-    background-color: #ffd9b3;
+    background-color: #fff0e1;
     border-radius: 5px;
     margin: 20px 0;
     color: #ff9933;
@@ -48,3 +53,224 @@ body {
     font-size: 80%;
     display: block;
 } 
+ 
+
+
+/*SIGNIN AND SIGNUP FORMS*/
+.signup-signin-body {
+    background: url("./005-G3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 100%;
+    overflow: visible;
+}
+
+.sign-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+ }
+
+.signup-form,
+.signin-form {
+    padding: 50px;
+    background-color: black;
+    color: white;
+    margin: 120px 0;
+}
+
+
+/*STYLES OF H1s ON ALL FORMS*/
+.headerOnForm {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+/*STYLES OF ALL SUBMIT BUTTONS USED ON THE LOGIN, SIGNUP,...*/
+input[type="submit"] {
+    background-color: black;
+    border: 2px solid white;
+    color:white;
+    border: none;
+    padding: 8px 16px;
+    font-weight: 600;
+    margin: 20px 0;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background-color: orange;
+    color:black;
+}
+
+/*STYLES OF INPUT FIELDS ON FORMS*/
+input[type="text"],
+input[type="password"], 
+select {
+    padding: 5px 10px;
+}
+
+/*STYLES OF BELLOW MESSAGES*/
+.text-messages-auth {
+    text-align: center;
+}
+
+/*STYLES OF LINKS*/
+a {
+    text-decoration:none;
+    color: orange;
+}
+
+a:hover {
+    color: brown;
+}
+
+/*STYLES FOR THE DATE STYLE OF THE FORM*/
+td {
+    padding: 10px 5px;
+}
+
+
+
+
+
+
+/*STYLES FOR THE DASHBOARD*/
+.top-navigation-bar, 
+.logo,
+.dashboard-title,
+.username {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.top-navigation-bar {
+    background-color: black;
+    padding: 2px 0;
+    color:white;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.logo,
+.username {
+    justify-content: space-between;
+}
+
+.go-home-link {
+    color: #0087ee;
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+.go-home-link:hover {
+    color: orange;
+}
+
+.logo img {
+    width: 50px;
+}
+
+.username img {
+    width: 40px;
+}
+
+.logo img,
+.username img {
+    margin-right: 10px;
+}
+
+
+
+
+
+
+/*STYLES FOR DETAILS IN THE CONTAINER OF EVERY PAGE */
+.page-title {
+    font-size: 300%;
+    text-align: center;
+    margin: 40px 0 40px;
+}
+
+h2 {
+    margin-bottom: 40px;
+}
+
+
+
+
+
+/*STYLES FOR ELEMENTS INSIDE THE DASHBOARD*/
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+h1 {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.contract-table,
+.registration-table,
+.user-table,
+.admin-table {
+   border-collapse: collapse;
+   font-size: 0.9em;
+   font-family: sans-serif;
+   max-width: 100%;
+   margin-bottom: 40px;
+}
+
+.contract-table,
+.registration-table,
+.user-table,
+.admin-table {
+    text-align: left;
+}
+
+.contract-table th,
+.contract-table td,
+.registration-table th,
+.registration-table td,
+.user-table th,
+.user-table td,
+.admin-table th
+.admin-table td{
+    padding: 12px 15px;
+}
+
+.contract-table tbody tr,
+.registration-table tbody tr,
+.user-table tbody tr,
+.admin-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.contract-table tbody tr:nth-last-of-type(even),
+.registration-table tbody tr:nth-last-of-type(even),
+.user-table tbody tr:nth-last-of-type(even),
+.admin-table tbody tr:nth-last-of-type(even) {
+    background-color: #e6eeff;
+    padding: 6px 7px;
+}
+
+.contract-table tbody tr:last-of-type,
+.registration-table tbody tr:last-of-type,
+.user-table tbody tr:last-of-type,
+.admin-table tbody tr:last-of-type {
+    border-bottom: 2px solid #0087ee;
+}
+
+.contract-table input[type="submit"],
+.registration-table input[type="submit"],
+.user-table input[type="submit"],
+.admin-table input[type="submit"]{
+    padding: 10px;
+    width: 60px;
+    margin: 0;
+}

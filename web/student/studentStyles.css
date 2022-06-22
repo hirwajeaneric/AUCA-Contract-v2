@@ -307,6 +307,7 @@ h3 {
     font-family: sans-serif;
     min-width: 400px;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .contract-table thead tr {
